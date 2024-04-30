@@ -8,6 +8,7 @@ public partial class QuestEditorGraph : GraphEdit
 	public PackedScene StartNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/StartNode.tscn");
 	public PackedScene EndNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/EndNode.tscn");
 	public PackedScene ObjectiveNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/ObjectiveNode.tscn");
+	public PackedScene ConditionNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/ConditionNode.tscn");
 
 	private Array<GraphNode> _selectedNodes = new Array<GraphNode>();
 
