@@ -15,6 +15,8 @@ public partial class QuestEditor : Control
 
 	private QuestEditorGraph _graph;
 
+	private string _saveFilePath;
+
 	public override void _Ready()
 	{
 		_newButton = GetNode<Button>("Content/MarginContainer/Toolbar/NewButton");
@@ -36,13 +38,65 @@ public partial class QuestEditor : Control
 		_loadFileDialog = GetNode<FileDialog>("LoadFileDialog");
 		_addNodeMenu = GetNode<PopupMenu>("AddNodePopupMenu");
 
+		_saveFileDialog.FileSelected += _onSaveFileDialogFileSelected;
+		_loadFileDialog.FileSelected += _onLoadFileDialogFileSelected;
 		_addNodeMenu.IndexPressed += (long idx) => _addNewNode((int)idx);
 
 		_graph = GetNode<QuestEditorGraph>("Content/QuestGraphEditor");
 	}
 
-	public override void _Process(double delta)
+	/// <summary>
+	/// Save the file to the given path
+	/// </summary>
+	/// <param name="path"></param>
+	private void saveFile(string path)
 	{
+		Error error = _graph.Save(path);
+		if (error != Error.Ok)
+		{
+			GD.PrintErr("Error saving file: " + path);
+		}
+		else
+		{
+			_saveFilePath = path;
+			EditorInterface.Singleton.GetResourceFilesystem().Scan();
+		}
+	}
+
+	/// <summary>
+	/// Load the file from the given path
+	/// </summary>
+	/// <param name="path"></param>
+	private void loadFile(string path)
+	{
+		_graph.Load(path);
+		_saveFilePath = path;
+	}
+
+	/// <summary>
+	/// Apply changes to the graph
+	/// </summary>
+	private void applyChanges()
+	{
+		if (_graph.GetChildCount() > 0)
+		{
+			saveChanges();
+		}
+	}
+
+	/// <summary>
+	/// Show a save file dialog if the file path is not set, otherwise save the file
+	/// </summary>
+	private void saveChanges()
+	{
+		if (_saveFilePath == null || _saveFilePath == "")
+		{
+			_saveFileDialog.Popup();
+		}
+		else
+		{
+			saveFile(_saveFilePath);
+		}
 	}
 
 	/// <summary>
@@ -66,7 +120,7 @@ public partial class QuestEditor : Control
 	/// </summary>
 	private void _on_SaveButton_pressed()
 	{
-		_saveFileDialog.Popup();
+		saveChanges();
 	}
 
 	/// <summary>
@@ -76,6 +130,24 @@ public partial class QuestEditor : Control
 	{
 		// ShowAddNodeMenu(GetGlobalMousePosition());
 		ShowAddNodeMenu(_addNodeButton.GlobalPosition);
+	}
+
+	/// <summary>
+	/// Save the file to the given path
+	/// </summary>
+	/// <param name="path"></param>
+	private void _onSaveFileDialogFileSelected(string path)
+	{
+		saveFile(path);
+	}
+
+	/// <summary>
+	/// Load the file from the given path
+	/// </summary>
+	/// <param name="path"></param>
+	private void _onLoadFileDialogFileSelected(string path)
+	{
+		loadFile(path);
 	}
 
 	/// <summary>
