@@ -11,7 +11,12 @@ public partial class StartNode : QuestGraphNode
     [Export]
     protected LineEdit nameTextEdit;
     [Export]
-    protected LineEdit descriptionTextEdit;
+    protected TextEdit descriptionTextEdit;
+
+    public override void _Ready()
+    {
+        base._Ready();
+    }
 
     protected override QuestNode _getModel()
     {

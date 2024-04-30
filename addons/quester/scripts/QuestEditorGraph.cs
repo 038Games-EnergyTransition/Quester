@@ -39,6 +39,11 @@ public partial class QuestEditorGraph : GraphEdit
 
 	public Error Save(string path)
 	{
+		QuestResource resource = _serializeResource();
+		if (resource != null)
+		{
+			return ResourceSaver.Save(resource, path);
+		}
 		return Error.CantCreate;
 	}
 
@@ -60,8 +65,20 @@ public partial class QuestEditorGraph : GraphEdit
 	/// <returns></returns>
 	private QuestResource _serializeResource()
 	{
-		Array<Node> startNodes = FindChildren("", "StartNode", false, false);
-		Array<Node> endNodes = FindChildren("", "EndNode", false, false);
+		Array<Node> startNodes = new Array<Node>();
+		Array<Node> endNodes = new Array<Node>();
+
+		foreach (Node node in GetChildren())
+		{
+			if (node is StartNode)
+			{
+				startNodes.Add(node);
+			}
+			else if (node is EndNode)
+			{
+				endNodes.Add(node);
+			}
+		}
 
 		if (startNodes.Count != 1)
 		{
@@ -121,6 +138,9 @@ public partial class QuestEditorGraph : GraphEdit
 			modelToGraphNodeMap[node.Id] = graphNode;
 		}
 
+		GD.Print(resource.Nodes);
+		GD.Print(resource.Edges);
+
 		foreach (QuestEdge edge in resource.Edges)
 		{
 			ConnectNode(((GraphNode)modelToGraphNodeMap[edge.From]).Name, 0, ((GraphNode)modelToGraphNodeMap[edge.To]).Name, edge.edgeType == QuestEdge.EdgeType.NORMAL ? 0 : 1);
@@ -138,15 +158,20 @@ public partial class QuestEditorGraph : GraphEdit
 		Dictionary createdNodes = new Dictionary();
 		foreach (QuestGraphNode node in GetChildren())
 		{
-			createdNodes[node.Id] = node.GetModel();
+			createdNodes[node.Name] = node.GetModel();
 		}
+
 		foreach (Dictionary connection in connections)
 		{
+			string fromNode = (string)connection["from_node"];
+			string toNode = (string)connection["to_node"];
+			int toPort = (int)connection["to_port"];
+
             QuestEdge edge = new QuestEdge
             {
-                From = (QuestNode)createdNodes[(StringName)connection["from_node"]],
-                To = (QuestNode)createdNodes[(StringName)connection["to_node"]],
-                edgeType = (int)connection["to_port"] == 0 ? QuestEdge.EdgeType.NORMAL : QuestEdge.EdgeType.CONDITIONAL
+                From = (QuestNode)createdNodes[fromNode],
+                To = (QuestNode)createdNodes[toNode],
+                edgeType = toPort == 0 ? QuestEdge.EdgeType.NORMAL : QuestEdge.EdgeType.CONDITIONAL
             };
             edges.Add(edge);
 		}
@@ -170,7 +195,16 @@ public partial class QuestEditorGraph : GraphEdit
 	}
 	public void AddNode(QuestGraphNode node, Vector2 position)
 	{
-		node.PositionOffset += position;
+		if (node.Id == null)
+		{
+			node.Id = NanoidGenerator.Generate(10);
+		}
+		node.PositionOffset = position;
+		if (!node.HasLoadedPosition)
+		{
+			node.PositionOffset += ScrollOffset;
+			node.PositionOffset /= Zoom;
+		}
 		AddChild(node);
 	}
 

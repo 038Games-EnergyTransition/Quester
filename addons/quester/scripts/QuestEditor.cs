@@ -54,7 +54,7 @@ public partial class QuestEditor : Control
 		Error error = _graph.Save(path);
 		if (error != Error.Ok)
 		{
-			GD.PrintErr("Error saving file: " + path);
+			GD.PrintErr($"Error({error}) saving file: " + path);
 		}
 		else
 		{

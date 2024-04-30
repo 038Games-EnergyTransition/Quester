@@ -11,7 +11,7 @@ bg_color = Color(0.266667, 0.541176, 0.172549, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 
-[node name="StartNode" type="GraphNode"]
+[node name="StartNode" type="GraphNode" node_paths=PackedStringArray("nameTextEdit", "descriptionTextEdit")]
 offset_right = 280.0
 offset_bottom = 304.0
 mouse_filter = 1
@@ -55,6 +55,8 @@ slot/3/right_color = Color(1, 1, 1, 1)
 slot/3/right_icon = null
 slot/3/draw_stylebox = true
 script = ExtResource("1_wwehx")
+nameTextEdit = NodePath("NameContainer/NameTextEdit")
+descriptionTextEdit = NodePath("DescriptionContainer/DescriptionTextEdit")
 
 [node name="OutputSlot" type="Label" parent="."]
 layout_mode = 2
