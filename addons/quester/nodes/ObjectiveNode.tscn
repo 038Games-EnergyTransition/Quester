@@ -118,13 +118,14 @@ layout_mode = 2
 placeholder_text = "Description"
 wrap_mode = 1
 
-[node name="MetaDataEditor" type="VBoxContainer" parent="." node_paths=PackedStringArray("container", "itemsContainer")]
+[node name="MetaDataEditor" type="VBoxContainer" parent="." node_paths=PackedStringArray("container", "itemsContainer", "addMetadataButton")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 script = ExtResource("2_nklti")
 container = NodePath("..")
 itemsContainer = NodePath("ScrollContainer/ItemContainer")
+addMetadataButton = NodePath("AddMetadataButton")
 
 [node name="MetadataLabel" type="Label" parent="MetaDataEditor"]
 layout_mode = 2

@@ -20,6 +20,10 @@ public partial class MetadataItem : VBoxContainer
     {
         removeButton.Icon = EditorInterface.Singleton.GetEditorTheme().GetIcon("Remove", "EditorIcons");
         _debouncer = new Debouncer(((EditorPlugin) EngineCS.GetMeta("QuesterPlugin")).GetTree());
+
+        removeButton.Pressed += _OnRemoveButtonPressed;
+        keyValue.TextChanged += _OnKeyValueTextChanged;
+        metadataInput.ValueChanged += _OnMetadataInputValueChanged;
     }
 
     public void SetKeyValue(string key, Variant value)

@@ -5,6 +5,9 @@ using Godot.Collections;
 public partial class ObjectiveNode : QuestGraphNode
 {
 
+    public string QuestDescription;
+    public bool Optional;
+
     [Export]
     protected CheckBox OptionalCheckBox;
     [Export]
@@ -14,10 +17,10 @@ public partial class ObjectiveNode : QuestGraphNode
 
     public override void _Ready()
     {
-    }
+        base._Ready();
 
-    public override void _Process(double delta)
-    {
+        descriptionTextEdit.TextChanged += _onDescriptionTextChanged;
+        OptionalCheckBox.Toggled += _onOptionalCheckBoxToggled;
     }
 
     protected override QuestNode _getModel()
@@ -27,11 +30,36 @@ public partial class ObjectiveNode : QuestGraphNode
 
     protected override void _setModelProperties(QuestNode node)
     {
-        throw new System.NotImplementedException();
+        QuestObjective objective = (QuestObjective)node;
+        objective.Description = QuestDescription;
+        objective.Optional = Optional;
+        foreach (string key in GetMetaList())
+        {
+            objective.SetMeta(key, GetMeta(key));
+        }
     }
 
     protected override void _getModelProperties(QuestNode node)
     {
-        throw new System.NotImplementedException();
+        QuestObjective objective = (QuestObjective)node;
+        QuestDescription = objective.Description;
+        Optional = objective.Optional;
+        descriptionTextEdit.Text = QuestDescription;
+        OptionalCheckBox.ButtonPressed = Optional;
+        foreach (string key in objective.GetMetaList())
+        {
+            SetMeta(key, objective.GetMeta(key));
+        }
+        metadataEditor.Update();
+    }
+
+    private void _onDescriptionTextChanged()
+    {
+        QuestDescription = descriptionTextEdit.Text;
+    }
+
+    private void _onOptionalCheckBoxToggled(bool toggled)
+    {
+        Optional = toggled;
     }
 }

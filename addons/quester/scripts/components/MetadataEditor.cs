@@ -12,8 +12,16 @@ public partial class MetadataEditor : VBoxContainer
     public Node container;
     [Export]
     public VBoxContainer itemsContainer;
+    [Export]
+    public Button addMetadataButton;
 
     private Array<MetadataItem> _currentMeta = new Array<MetadataItem>();
+
+    public override void _Ready()
+    {
+        // addMetadataButton.Icon = EditorInterface.Singleton.GetEditorTheme().GetIcon("Add", "EditorIcons");
+        addMetadataButton.Pressed += OnAddMetadataButtonPressed;
+    }
 
     public void Update()
     {
