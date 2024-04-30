@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://btfqcl1vwi6dy"]
+[gd_scene load_steps=3 format=3 uid="uid://btfqcl1vwi6dy"]
+
+[ext_resource type="Script" path="res://addons/quester/scripts/nodes/EndNode.cs" id="1_if1s7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ooac"]
 content_margin_left = 4.0
@@ -13,7 +15,6 @@ corner_radius_top_right = 4
 offset_right = 280.0
 offset_bottom = 304.0
 mouse_filter = 1
-show_close = true
 theme_override_constants/separation = 10
 theme_override_styles/titlebar = SubResource("StyleBoxFlat_0ooac")
 title = "End"
@@ -53,6 +54,7 @@ slot/3/right_type = 0
 slot/3/right_color = Color(1, 1, 1, 1)
 slot/3/right_icon = null
 slot/3/draw_stylebox = true
+script = ExtResource("1_if1s7")
 
 [node name="InputSlot" type="Label" parent="."]
 layout_mode = 2

@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://msvsd8rv7kg6"]
+[gd_scene load_steps=4 format=3 uid="uid://msvsd8rv7kg6"]
+
+[ext_resource type="Script" path="res://addons/quester/scripts/nodes/ConditionNode.cs" id="1_pymwc"]
+[ext_resource type="PackedScene" uid="uid://cdmvb6rdyjmhy" path="res://addons/quester/scenes/MetadataInput.tscn" id="2_l1xol"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clbna"]
 content_margin_left = 4.0
@@ -9,8 +12,8 @@ bg_color = Color(0.541176, 0.513726, 0.172549, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 
-[node name="ConditionNode" type="GraphNode"]
-offset_right = 280.0
+[node name="ConditionNode" type="GraphNode" node_paths=PackedStringArray("typeInput", "keyInput", "metaInput")]
+offset_right = 377.0
 offset_bottom = 304.0
 mouse_filter = 1
 theme_override_constants/separation = 10
@@ -52,6 +55,19 @@ slot/3/right_type = 0
 slot/3/right_color = Color(1, 1, 1, 1)
 slot/3/right_icon = null
 slot/3/draw_stylebox = true
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color(1, 1, 1, 1)
+slot/4/left_icon = null
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color(1, 1, 1, 1)
+slot/4/right_icon = null
+slot/4/draw_stylebox = true
+script = ExtResource("1_pymwc")
+typeInput = NodePath("Type/TypeInput")
+keyInput = NodePath("Key/KeyInput")
+metaInput = NodePath("Value/MetadataInput")
 
 [node name="OutputSlot" type="Label" parent="."]
 layout_mode = 2
@@ -62,27 +78,36 @@ horizontal_alignment = 2
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="NameContainer" type="VBoxContainer" parent="."]
+[node name="Type" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="NameContainer"]
+[node name="Label" type="Label" parent="Type"]
 layout_mode = 2
-text = "Name"
+text = "Query Type"
 
-[node name="NameTextEdit" type="LineEdit" parent="NameContainer"]
+[node name="TypeInput" type="LineEdit" parent="Type"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-placeholder_text = "Name"
+placeholder_text = "Type"
 
-[node name="DescriptionContainer" type="VBoxContainer" parent="."]
+[node name="Key" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="DescriptionLabel" type="Label" parent="DescriptionContainer"]
+[node name="Label" type="Label" parent="Key"]
 layout_mode = 2
-text = "Description"
+text = "Key"
 
-[node name="DescriptionTextEdit" type="TextEdit" parent="DescriptionContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="KeyInput" type="LineEdit" parent="Key"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-placeholder_text = "Description"
-wrap_mode = 1
+placeholder_text = "Key"
+
+[node name="Value" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Value"]
+layout_mode = 2
+text = "Value"
+
+[node name="MetadataInput" parent="Value" instance=ExtResource("2_l1xol")]
+layout_mode = 2

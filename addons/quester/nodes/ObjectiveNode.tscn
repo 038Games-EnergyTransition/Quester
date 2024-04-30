@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlslowh5d4hwf"]
+[gd_scene load_steps=4 format=3 uid="uid://dlslowh5d4hwf"]
+
+[ext_resource type="Script" path="res://addons/quester/scripts/nodes/ObjectiveNode.cs" id="1_0412y"]
+[ext_resource type="Script" path="res://addons/quester/scripts/components/MetadataEditor.cs" id="2_nklti"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aq1mx"]
 content_margin_left = 4.0
@@ -9,9 +12,9 @@ bg_color = Color(0.235294, 0.329412, 0.541176, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 
-[node name="ObjectiveNode" type="GraphNode"]
-offset_right = 280.0
-offset_bottom = 304.0
+[node name="ObjectiveNode" type="GraphNode" node_paths=PackedStringArray("OptionalCheckBox", "descriptionTextEdit", "metadataEditor")]
+offset_right = 468.0
+offset_bottom = 483.0
 mouse_filter = 1
 theme_override_constants/separation = 10
 theme_override_styles/titlebar = SubResource("StyleBoxFlat_aq1mx")
@@ -61,6 +64,19 @@ slot/4/right_type = 0
 slot/4/right_color = Color(1, 1, 1, 1)
 slot/4/right_icon = null
 slot/4/draw_stylebox = true
+slot/5/left_enabled = false
+slot/5/left_type = 0
+slot/5/left_color = Color(1, 1, 1, 1)
+slot/5/left_icon = null
+slot/5/right_enabled = false
+slot/5/right_type = 0
+slot/5/right_color = Color(1, 1, 1, 1)
+slot/5/right_icon = null
+slot/5/draw_stylebox = true
+script = ExtResource("1_0412y")
+OptionalCheckBox = NodePath("OptionalCheckbox")
+descriptionTextEdit = NodePath("DescriptionContainer/DescriptionTextEdit")
+metadataEditor = NodePath("MetaDataEditor")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -85,17 +101,9 @@ text = "Condition"
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="NameContainer" type="VBoxContainer" parent="."]
+[node name="OptionalCheckbox" type="CheckBox" parent="."]
 layout_mode = 2
-
-[node name="NameLabel" type="Label" parent="NameContainer"]
-layout_mode = 2
-text = "Name"
-
-[node name="NameTextEdit" type="LineEdit" parent="NameContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-placeholder_text = "Name"
+text = "Optional"
 
 [node name="DescriptionContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -109,3 +117,30 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 placeholder_text = "Description"
 wrap_mode = 1
+
+[node name="MetaDataEditor" type="VBoxContainer" parent="." node_paths=PackedStringArray("container", "itemsContainer")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+script = ExtResource("2_nklti")
+container = NodePath("..")
+itemsContainer = NodePath("ScrollContainer/ItemContainer")
+
+[node name="MetadataLabel" type="Label" parent="MetaDataEditor"]
+layout_mode = 2
+text = "Metadata"
+
+[node name="AddMetadataButton" type="Button" parent="MetaDataEditor"]
+layout_mode = 2
+text = "Add Metadata"
+
+[node name="HSeparator" type="HSeparator" parent="MetaDataEditor"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MetaDataEditor"]
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="MetaDataEditor/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

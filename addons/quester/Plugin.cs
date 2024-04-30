@@ -13,12 +13,16 @@ public partial class Plugin : EditorPlugin
 		MainPanelWindow = (QuestEditor)MainPanel.Instantiate();
 		EditorInterface.Singleton.GetEditorMainScreen().AddChild(MainPanelWindow);
 
+		EngineCS.SetMeta("QuesterPlugin", this);
+
 		_MakeVisible(false);
 	}
 
 	public override void _ExitTree()
 	{
 		EditorInterface.Singleton.GetEditorMainScreen().RemoveChild(MainPanelWindow);
+
+		EngineCS.RemoveMeta("QuesterPlugin");
 
 		MainPanelWindow.Free();
 	}

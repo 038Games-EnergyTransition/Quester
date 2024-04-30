@@ -10,8 +10,8 @@ public partial class QuestEditorGraph : GraphEdit
 	public PackedScene ObjectiveNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/ObjectiveNode.tscn");
 	public PackedScene ConditionNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/ConditionNode.tscn");
 
-	private Array<GraphNode> _selectedNodes = new Array<GraphNode>();
-	private Array<GraphNode> _copiedNodes = new Array<GraphNode>();
+	private Array<QuestGraphNode> _selectedNodes = new Array<QuestGraphNode>();
+	private Array<QuestGraphNode> _copiedNodes = new Array<QuestGraphNode>();
 
 	public override void _Ready()
 	{
@@ -48,7 +48,7 @@ public partial class QuestEditorGraph : GraphEdit
 	/// <param name="position"></param>
 	public void AddNode(PackedScene scene, Vector2 position)
 	{
-		GraphNode node = scene.Instantiate() as GraphNode;
+		QuestGraphNode node = scene.Instantiate() as QuestGraphNode;
 		node.PositionOffset += position;
 		AddChild(node);
 	}
@@ -83,12 +83,12 @@ public partial class QuestEditorGraph : GraphEdit
 	/// <param name="node"></param>
 	private void _onNodeSelected(Node node)
 	{
-		if (node is GraphNode)
+		if (node is QuestGraphNode)
 		{
-			(node as GraphNode).Selected = true;
-			if (!_selectedNodes.Contains(node as GraphNode))
+			(node as QuestGraphNode).Selected = true;
+			if (!_selectedNodes.Contains(node as QuestGraphNode))
 			{
-				_selectedNodes.Add(node as GraphNode);
+				_selectedNodes.Add(node as QuestGraphNode);
 			}
 		}
 	}
@@ -99,12 +99,12 @@ public partial class QuestEditorGraph : GraphEdit
 	/// <param name="node"></param>
 	private void _onNodeDeselected(Node node)
 	{
-		if (node is GraphNode)
+		if (node is QuestGraphNode)
 		{
-			(node as GraphNode).Selected = false;
-			if (_selectedNodes.Contains(node as GraphNode))
+			(node as QuestGraphNode).Selected = false;
+			if (_selectedNodes.Contains(node as QuestGraphNode))
 			{
-				_selectedNodes.Remove(node as GraphNode);
+				_selectedNodes.Remove(node as QuestGraphNode);
 			}
 		}
 	}
@@ -115,7 +115,7 @@ public partial class QuestEditorGraph : GraphEdit
 	private void _onNodeCopyRequest()
 	{
 		_copiedNodes.Clear();
-		foreach (GraphNode node in _selectedNodes)
+		foreach (QuestGraphNode node in _selectedNodes)
 		{
 			_copiedNodes.Add(node);
 		}
@@ -127,9 +127,9 @@ public partial class QuestEditorGraph : GraphEdit
 	/// </summary>
 	private void _onNodePasteRequest()
 	{
-		foreach (GraphNode node in _copiedNodes)
+		foreach (QuestGraphNode node in _copiedNodes)
 		{
-			GraphNode newNode = node.Duplicate() as GraphNode;
+			QuestGraphNode newNode = node.Duplicate() as QuestGraphNode;
 			newNode.PositionOffset += new Vector2(50, 50);
 			AddChild(newNode);
 		}
@@ -143,7 +143,7 @@ public partial class QuestEditorGraph : GraphEdit
 	{
 		foreach (Dictionary connection in GetConnectionList())
 		{
-			foreach (GraphNode node in _selectedNodes)
+			foreach (QuestGraphNode node in _selectedNodes)
 			{
 				if ((StringName)connection["from_node"] == node.Name || (StringName)connection["to_node"] == node.Name)
 				{
@@ -152,7 +152,7 @@ public partial class QuestEditorGraph : GraphEdit
 			}
 		}
 
-		foreach (GraphNode node in _selectedNodes)
+		foreach (QuestGraphNode node in _selectedNodes)
 		{
 			if (node == null)
 			{
