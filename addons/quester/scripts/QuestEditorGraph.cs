@@ -11,6 +11,7 @@ public partial class QuestEditorGraph : GraphEdit
 	public PackedScene ConditionNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/ConditionNode.tscn");
 
 	private Array<GraphNode> _selectedNodes = new Array<GraphNode>();
+	private Array<GraphNode> _copiedNodes = new Array<GraphNode>();
 
 	public override void _Ready()
 	{
@@ -19,6 +20,8 @@ public partial class QuestEditorGraph : GraphEdit
 		NodeSelected += _onNodeSelected;
 		NodeDeselected += _onNodeDeselected;
 		DeleteNodesRequest += _onDeleteNodesRequest;
+		CopyNodesRequest += _onNodeCopyRequest;
+		PasteNodesRequest += _onNodePasteRequest;
 	}
 
 	public override void _Process(double delta)
@@ -80,7 +83,6 @@ public partial class QuestEditorGraph : GraphEdit
 	/// <param name="node"></param>
 	private void _onNodeSelected(Node node)
 	{
-		GD.Print("Selected node: " + node.Name);
 		if (node is GraphNode)
 		{
 			(node as GraphNode).Selected = true;
@@ -97,7 +99,6 @@ public partial class QuestEditorGraph : GraphEdit
 	/// <param name="node"></param>
 	private void _onNodeDeselected(Node node)
 	{
-		GD.Print("Deselected node: " + node.Name);
 		if (node is GraphNode)
 		{
 			(node as GraphNode).Selected = false;
@@ -105,6 +106,32 @@ public partial class QuestEditorGraph : GraphEdit
 			{
 				_selectedNodes.Remove(node as GraphNode);
 			}
+		}
+	}
+
+	/// <summary>
+	/// Copy all selected nodes to a buffer
+	/// </summary>
+	private void _onNodeCopyRequest()
+	{
+		_copiedNodes.Clear();
+		foreach (GraphNode node in _selectedNodes)
+		{
+			_copiedNodes.Add(node);
+		}
+		_selectedNodes.Clear();
+	}
+
+	/// <summary>
+	/// Paste all copied nodes to the graph with a slight offset
+	/// </summary>
+	private void _onNodePasteRequest()
+	{
+		foreach (GraphNode node in _copiedNodes)
+		{
+			GraphNode newNode = node.Duplicate() as GraphNode;
+			newNode.PositionOffset += new Vector2(50, 50);
+			AddChild(newNode);
 		}
 	}
 
