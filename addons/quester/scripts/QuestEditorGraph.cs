@@ -109,7 +109,7 @@ public partial class QuestEditorGraph : GraphEdit
 	/// <param name="resource"></param>
 	private void _deserializeResource(QuestResource resource)
 	{
-		Clear();
+        Clear();
 		Dictionary modelToGraphNodeMap = new Dictionary();
 		foreach (QuestNode node in resource.Nodes)
 		{
@@ -140,14 +140,7 @@ public partial class QuestEditorGraph : GraphEdit
 			modelToGraphNodeMap[node.Id] = graphNode;
 		}
 
-		// QuestEdge edge2 = new QuestEdge();
-		// edge2.From = resource.Nodes[0];
-		// edge2.To = resource.Nodes[1];
-		// edge2.edgeType = QuestEdge.EdgeType.NORMAL;
-		// resource.Edges.Clear();
-		// resource.Edges.Add(edge2);
-
-		foreach (QuestEdge edge in resource.Edges)
+        foreach (QuestEdge edge in resource.Edges)
 		{
 			ConnectNode(((GraphNode)modelToGraphNodeMap[edge.From.Id]).Name, 0, ((GraphNode)modelToGraphNodeMap[edge.To.Id]).Name, edge.edgeType == QuestEdge.EdgeType.NORMAL ? 0 : 1);
 		}

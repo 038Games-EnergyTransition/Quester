@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 
+[Tool]
 public partial class QuestEdge : Resource
 {
 
@@ -35,8 +36,5 @@ public partial class QuestEdge : Resource
         From = (QuestNode)data["From"];
         To = (QuestNode)data["To"];
         edgeType = (int)data["EdgeType"] == 0 ? EdgeType.NORMAL : EdgeType.CONDITIONAL;
-        // Id = (string)data["Id"];
-
-        // Completed = (bool)data["Completed"];
     }
 }
