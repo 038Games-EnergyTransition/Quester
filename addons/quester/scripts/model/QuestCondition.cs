@@ -17,20 +17,25 @@ public partial class QuestCondition : QuestNode
     [Export]
     public string Key;
 
-    public Variant Value {
-        get {
+    public Variant Value
+    {
+        get
+        {
             return GetMeta("Value");
         }
-        set {
+        set
+        {
             SetMeta("Value", value);
         }
     }
 
     public new void Update()
     {
-        if (!Completed) {
-            // TODO: Emit condition query requested signal
-            // Questify.condition_query_requested.emit(type, key, value, self)
+        if (!Completed)
+        {
+
+            // DONE: Emit condition query requested signal
+            EmitSignal(QuestManager.SignalName.ConditionQueryRequested, Type, Key, Value, this);
         }
     }
 }

@@ -46,7 +46,8 @@ public partial class QuestResource : Resource
         if (!Completed && !Started)
         {
             _startNode.Active = true;
-            // TODO: Emit signal to notify that the quest has started.
+            // DONE: Emit signal to notify that the quest has started.
+            EmitSignal(QuestManager.SignalName.QuestStarted, this);
             NotifyActiveObjectives();
         }
     }
@@ -111,69 +112,59 @@ public partial class QuestResource : Resource
 
     public void RequestQuery(string type, string key, Variant value, QuestCondition requester)
     {
-        // TODO: Emit signal to request a query.
-        // Questify.condition_query_requested.emit(type, key, value, requester)
+        // DONE: Emit signal to request a query.
+        EmitSignal(QuestManager.SignalName.ConditionQueryRequested, type, key, value, requester);
     }
 
     public void CompleteObjective(QuestObjective objective)
     {
-        // TODO: Emit signal to notify that an objective has been completed.
-        // Questify.quest_objective_completed.emit(self, objective)
+        // DONE: Emit signal to notify that an objective has been completed.
+        EmitSignal(QuestManager.SignalName.QuestObjectiveCompleted, this, objective);
         NotifyActiveObjectives();
     }
 
     public void CompleteQuest()
     {
         Completed = true;
-        // TODO: Emit signal to notify that the quest has been completed.
-        // Questify.quest_completed.emit(self)
+        // DONE: Emit signal to notify that the quest has been completed.
+        EmitSignal(QuestManager.SignalName.QuestCompleted, this);
     }
 
-    // public Dictionary Serialize()
-    // {
-    //     Dictionary data = new Dictionary();
-    //     data["Completed"] = Completed;
-    //     data["Nodes"] = new Array();
-    //     foreach (QuestNode node in Nodes)
-    //     {
-    //         ((Array)data["Nodes"]).Add(node.Serialize());
-    //     }
-    //     data["Edges"] = new Array();
-    //     foreach (QuestEdge edge in Edges)
-    //     {
-    //         ((Array)data["Edges"]).Add(edge.Serialize());
-    //     }
-    //     return data;
-    // }
+    public Dictionary Serialize()
+    {
+        Dictionary data = new Dictionary();
+        data["Completed"] = Completed;
+        data["Nodes"] = new Array();
+        foreach (QuestNode node in Nodes)
+        {
+            ((Array)data["Nodes"]).Add(node.Serialize());
+        }
+        return data;
+    }
 
-    // public void Deserialize(Dictionary data)
-    // {
-    //     if (!IsInstance)
-    //     {
-    //         GD.PrintErr("QuestResource: Deserialize() called on non-instance resource.");
-    //         return;
-    //     }
+    public void Deserialize(Dictionary data)
+    {
+        if (!IsInstance)
+        {
+            GD.PrintErr("QuestResource: Deserialize() called on non-instance resource.");
+            return;
+        }
 
-    //     Completed = (bool)data["Completed"];
-        
-    //     Dictionary node_map = new Dictionary();
-    //     foreach (QuestNode node in Nodes) {
-    //         node_map[node.Id] = node;
-    //     }
-    //     foreach (Dictionary node in (Array)data["Nodes"]) {
-    //         if (node_map.ContainsKey(node["Id"])){
-    //             ((QuestNode)node_map[node["Id"]]).Deserialize(node);
-    //         }
-    //     }
+        Completed = (bool)data["Completed"];
 
-    //     Edges.Clear();
-    //     foreach (Dictionary edge in (Array)data["Edges"]) {
-    //         GD.Print(edge);
-    //         QuestEdge new_edge = new QuestEdge();
-    //         new_edge.Deserialize(edge);
-    //         Edges.Add(new_edge);
-    //     }
-    // }
+        Dictionary node_map = new Dictionary();
+        foreach (QuestNode node in Nodes)
+        {
+            node_map[node.Id] = node;
+        }
+        foreach (Dictionary node in (Array)data["Nodes"])
+        {
+            if (node_map.ContainsKey(node["Id"]))
+            {
+                ((QuestNode)node_map[node["Id"]]).Deserialize(node);
+            }
+        }
+    }
 
     /// <summary>
     /// Initialized all nodes in the graph.
@@ -201,8 +192,8 @@ public partial class QuestResource : Resource
     {
         foreach (QuestObjective objective in GetActiveObjectives())
         {
-            // TODO: Emit signal to notify that a new objective has been added.
-            // Questify.quest_objective_added.emit(self, objective)
+            // DONE: Emit signal to notify that a new objective has been added.
+            EmitSignal(QuestManager.SignalName.QuestObjectiveAdded, this, objective);
         }
     }
 }
