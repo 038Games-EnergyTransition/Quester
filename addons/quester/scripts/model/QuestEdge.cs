@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public partial class QuestEdge : Resource
 {
@@ -15,4 +16,27 @@ public partial class QuestEdge : Resource
     public QuestNode To;
     [Export]
     public EdgeType edgeType;
+
+    public Dictionary Serialize()
+    {
+        Dictionary data = new Dictionary
+        {
+            { "From", From },
+            { "To", To },
+            { "EdgeType", edgeType == EdgeType.NORMAL ? 0 : 1 }
+        };
+
+        return data;
+    }
+
+
+    public void Deserialize(Dictionary data)
+    {
+        From = (QuestNode)data["From"];
+        To = (QuestNode)data["To"];
+        edgeType = (int)data["EdgeType"] == 0 ? EdgeType.NORMAL : EdgeType.CONDITIONAL;
+        // Id = (string)data["Id"];
+
+        // Completed = (bool)data["Completed"];
+    }
 }

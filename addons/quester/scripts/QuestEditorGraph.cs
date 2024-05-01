@@ -49,7 +49,7 @@ public partial class QuestEditorGraph : GraphEdit
 
 	public QuestResource Load(string path)
 	{
-		QuestResource resource = ResourceLoader.Load(path, "", ResourceLoader.CacheMode.Ignore) as QuestResource;
+		QuestResource resource = ResourceLoader.Load(path, "QuestResource", ResourceLoader.CacheMode.Ignore) as QuestResource;
 		LoadResource(resource);
 		return resource;
 	}
@@ -94,8 +94,10 @@ public partial class QuestEditorGraph : GraphEdit
 
 		Array<Dictionary> connections = GetConnectionList();
 		QuestResource resource = new QuestResource();
+		Array<QuestNode> nodes = new Array<QuestNode>();
 		Array<QuestEdge> edges = new Array<QuestEdge>();
-		resource.Nodes = _getNodes(connections, ref edges);
+		_getNodes(connections, ref nodes, ref edges);
+		resource.Nodes = nodes;
 		resource.Edges = edges;
 
 		return resource;
@@ -138,12 +140,16 @@ public partial class QuestEditorGraph : GraphEdit
 			modelToGraphNodeMap[node.Id] = graphNode;
 		}
 
-		GD.Print(resource.Nodes);
-		GD.Print(resource.Edges);
+		// QuestEdge edge2 = new QuestEdge();
+		// edge2.From = resource.Nodes[0];
+		// edge2.To = resource.Nodes[1];
+		// edge2.edgeType = QuestEdge.EdgeType.NORMAL;
+		// resource.Edges.Clear();
+		// resource.Edges.Add(edge2);
 
 		foreach (QuestEdge edge in resource.Edges)
 		{
-			ConnectNode(((GraphNode)modelToGraphNodeMap[edge.From]).Name, 0, ((GraphNode)modelToGraphNodeMap[edge.To]).Name, edge.edgeType == QuestEdge.EdgeType.NORMAL ? 0 : 1);
+			ConnectNode(((GraphNode)modelToGraphNodeMap[edge.From.Id]).Name, 0, ((GraphNode)modelToGraphNodeMap[edge.To.Id]).Name, edge.edgeType == QuestEdge.EdgeType.NORMAL ? 0 : 1);
 		}
 	}
 
@@ -153,7 +159,7 @@ public partial class QuestEditorGraph : GraphEdit
 	/// <param name="connections"></param>
 	/// <param name="edges"></param>
 	/// <returns></returns>
-	private Array<QuestNode> _getNodes(Array<Dictionary> connections, ref Array<QuestEdge> edges)
+	private void _getNodes(Array<Dictionary> connections, ref Array<QuestNode> nodes, ref Array<QuestEdge> edges)
 	{
 		Dictionary createdNodes = new Dictionary();
 		foreach (QuestGraphNode node in GetChildren())
@@ -176,12 +182,10 @@ public partial class QuestEditorGraph : GraphEdit
             edges.Add(edge);
 		}
 
-		Array<QuestNode> result = new Array<QuestNode>();
 		foreach (QuestNode node in createdNodes.Values)
 		{
-			result.Add(node);
+			nodes.Add(node);
 		}
-		return result;
 	}
 
 	/// <summary>

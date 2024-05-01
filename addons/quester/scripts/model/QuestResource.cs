@@ -129,38 +129,51 @@ public partial class QuestResource : Resource
         // Questify.quest_completed.emit(self)
     }
 
-    public Dictionary Serialize()
-    {
-        Dictionary data = new Dictionary();
-        data["Completed"] = Completed;
-        data["Nodes"] = new Array();
-        foreach (QuestNode node in Nodes)
-        {
-            ((Array)data["Nodes"]).Add(node.Serialize());
-        }
-        return data;
-    }
+    // public Dictionary Serialize()
+    // {
+    //     Dictionary data = new Dictionary();
+    //     data["Completed"] = Completed;
+    //     data["Nodes"] = new Array();
+    //     foreach (QuestNode node in Nodes)
+    //     {
+    //         ((Array)data["Nodes"]).Add(node.Serialize());
+    //     }
+    //     data["Edges"] = new Array();
+    //     foreach (QuestEdge edge in Edges)
+    //     {
+    //         ((Array)data["Edges"]).Add(edge.Serialize());
+    //     }
+    //     return data;
+    // }
 
-    public void Deserialize(Dictionary data)
-    {
-        if (!IsInstance)
-        {
-            GD.PrintErr("QuestResource: Deserialize() called on non-instance resource.");
-            return;
-        }
+    // public void Deserialize(Dictionary data)
+    // {
+    //     if (!IsInstance)
+    //     {
+    //         GD.PrintErr("QuestResource: Deserialize() called on non-instance resource.");
+    //         return;
+    //     }
 
-        Completed = (bool)data["Completed"];
+    //     Completed = (bool)data["Completed"];
         
-        Dictionary node_map = new Dictionary();
-        foreach (QuestNode node in Nodes) {
-            node_map[node.Id] = node;
-        }
-        foreach (Dictionary node in (Array)data["Nodes"]) {
-            if (node_map.ContainsKey(node["Id"])){
-                ((QuestNode)node_map[node["Id"]]).Deserialize(node);
-            }
-        }
-    }
+    //     Dictionary node_map = new Dictionary();
+    //     foreach (QuestNode node in Nodes) {
+    //         node_map[node.Id] = node;
+    //     }
+    //     foreach (Dictionary node in (Array)data["Nodes"]) {
+    //         if (node_map.ContainsKey(node["Id"])){
+    //             ((QuestNode)node_map[node["Id"]]).Deserialize(node);
+    //         }
+    //     }
+
+    //     Edges.Clear();
+    //     foreach (Dictionary edge in (Array)data["Edges"]) {
+    //         GD.Print(edge);
+    //         QuestEdge new_edge = new QuestEdge();
+    //         new_edge.Deserialize(edge);
+    //         Edges.Add(new_edge);
+    //     }
+    // }
 
     /// <summary>
     /// Initialized all nodes in the graph.
