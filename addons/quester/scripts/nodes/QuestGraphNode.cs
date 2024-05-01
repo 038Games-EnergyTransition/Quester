@@ -5,19 +5,22 @@ using Godot.Collections;
 public abstract partial class QuestGraphNode : GraphNode
 {
 
-    public override void _Ready()
-    {
-    }
-
-    public override void _Process(double delta)
-    {
-    }
+    public string Id;
+    public bool HasLoadedPosition;
 
     public QuestNode GetModel() {
         QuestNode node = _getModel();
+        node.Id = Id;
         node.GraphEditorPosition = PositionOffset;
         _setModelProperties(node);
         return node;
+    }
+
+    public void LoadModel(QuestNode node) {
+        Id = node.Id;
+        PositionOffset = node.GraphEditorPosition;
+        HasLoadedPosition = true;
+        _getModelProperties(node);
     }
 
     protected abstract QuestNode _getModel();

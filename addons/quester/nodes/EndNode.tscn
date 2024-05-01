@@ -13,7 +13,7 @@ corner_radius_top_right = 4
 
 [node name="EndNode" type="GraphNode"]
 offset_right = 280.0
-offset_bottom = 304.0
+offset_bottom = 98.0
 mouse_filter = 1
 theme_override_constants/separation = 10
 theme_override_styles/titlebar = SubResource("StyleBoxFlat_0ooac")
@@ -36,24 +36,6 @@ slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
-slot/2/left_enabled = false
-slot/2/left_type = 0
-slot/2/left_color = Color(1, 1, 1, 1)
-slot/2/left_icon = null
-slot/2/right_enabled = false
-slot/2/right_type = 0
-slot/2/right_color = Color(1, 1, 1, 1)
-slot/2/right_icon = null
-slot/2/draw_stylebox = true
-slot/3/left_enabled = false
-slot/3/left_type = 0
-slot/3/left_color = Color(1, 1, 1, 1)
-slot/3/left_icon = null
-slot/3/right_enabled = false
-slot/3/right_type = 0
-slot/3/right_color = Color(1, 1, 1, 1)
-slot/3/right_icon = null
-slot/3/draw_stylebox = true
 script = ExtResource("1_if1s7")
 
 [node name="InputSlot" type="Label" parent="."]
@@ -63,28 +45,3 @@ text = "Input"
 [node name="HSeparator" type="HSeparator" parent="."]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-
-[node name="NameContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="NameLabel" type="Label" parent="NameContainer"]
-layout_mode = 2
-text = "Name"
-
-[node name="NameTextEdit" type="LineEdit" parent="NameContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-placeholder_text = "Name"
-
-[node name="DescriptionContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="DescriptionLabel" type="Label" parent="DescriptionContainer"]
-layout_mode = 2
-text = "Description"
-
-[node name="DescriptionTextEdit" type="TextEdit" parent="DescriptionContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-placeholder_text = "Description"
-wrap_mode = 1
