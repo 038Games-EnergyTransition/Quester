@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 
 [Tool]
-public partial class ConditionNode : QuestGraphNode
+public partial class ActionNode : QuestGraphNode
 {
 
     public string Type;
@@ -27,12 +27,12 @@ public partial class ConditionNode : QuestGraphNode
 
     protected override QuestNode _getModel()
     {
-        return new QuestCondition();
+        return new QuestAction();
     }
 
     protected override void _setModelProperties(QuestNode node)
     {
-        QuestCondition condition = (QuestCondition)node;
+        QuestAction condition = (QuestAction)node;
         condition.Type = Type;
         condition.Key = Key;
         condition.SetMeta("Value", Value);
@@ -40,7 +40,7 @@ public partial class ConditionNode : QuestGraphNode
 
     protected override void _getModelProperties(QuestNode node)
     {
-        QuestCondition condition = (QuestCondition)node;
+        QuestAction condition = (QuestAction)node;
         Type = condition.Type;
         Key = condition.Key;
         Value = condition.GetMeta("Value", false);

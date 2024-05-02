@@ -9,6 +9,7 @@ public partial class QuestEditorGraph : GraphEdit
 	public PackedScene EndNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/EndNode.tscn");
 	public PackedScene ObjectiveNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/ObjectiveNode.tscn");
 	public PackedScene ConditionNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/ConditionNode.tscn");
+	public PackedScene ActionNodeScene = GD.Load<PackedScene>("res://addons/quester/nodes/ActionNode.tscn");
 
 	private Array<QuestGraphNode> _selectedNodes = new Array<QuestGraphNode>();
 	private Array<QuestGraphNode> _copiedNodes = new Array<QuestGraphNode>();
@@ -127,6 +128,9 @@ public partial class QuestEditorGraph : GraphEdit
 					break;
 				case QuestCondition conditionNode:
 					graphNode = ConditionNodeScene.Instantiate() as ConditionNode;
+					break;
+				case QuestAction actionNode:
+					graphNode = ActionNodeScene.Instantiate() as ActionNode;
 					break;
 			}
 

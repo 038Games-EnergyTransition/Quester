@@ -191,6 +191,10 @@ public partial class QuestEditor : Control
 			case 3:
 				nodeScene = _graph.ConditionNodeScene;
 				break;
+			
+			case 4:
+				nodeScene = _graph.ActionNodeScene;
+				break;
 		}
 
 		if (nodeScene == null) {
