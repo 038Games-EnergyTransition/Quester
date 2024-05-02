@@ -1,0 +1,254 @@
+[gd_resource type="Resource" load_steps=42 format=3 uid="uid://da1j0533tdnk"]
+
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestStart.cs" id="1_qbua5"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestObjective.cs" id="2_jjq1h"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestEdge.cs" id="3_277wn"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestCondition.cs" id="4_qgjvj"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestEnd.cs" id="5_2cpyt"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestResource.cs" id="6_8l2sh"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestAction.cs" id="6_itrr3"]
+
+[sub_resource type="Resource" id="Resource_b8hpm"]
+script = ExtResource("1_qbua5")
+Name = "Red Quest"
+Description = ""
+Id = "5C6hziiKwx"
+Optional = false
+GraphEditorPosition = Vector2(180, 200)
+
+[sub_resource type="Resource" id="Resource_httun"]
+script = ExtResource("2_jjq1h")
+Description = "Go to green"
+Id = "ukC8wY7ICo"
+Optional = true
+GraphEditorPosition = Vector2(680, 160)
+
+[sub_resource type="Resource" id="Resource_x12uc"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_b8hpm")
+To = SubResource("Resource_httun")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_qa3dr"]
+script = ExtResource("5_2cpyt")
+Id = "8HOkdF91kD"
+Optional = false
+GraphEditorPosition = Vector2(1620, 180)
+
+[sub_resource type="Resource" id="Resource_jnmqf"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_httun")
+To = SubResource("Resource_qa3dr")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_uwr6g"]
+script = ExtResource("4_qgjvj")
+Type = "variable"
+Key = "game_state"
+Id = "90hM3wPoyY"
+Optional = false
+GraphEditorPosition = Vector2(120, 600)
+metadata/Value = 0
+
+[sub_resource type="Resource" id="Resource_rnwk1"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_uwr6g")
+To = SubResource("Resource_httun")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_e3qap"]
+script = ExtResource("6_itrr3")
+Type = "variable"
+Key = "red_speak"
+Id = "jqbwtUor2y"
+Optional = false
+GraphEditorPosition = Vector2(1520, 440)
+metadata/Value = "Speak to green first!"
+
+[sub_resource type="Resource" id="Resource_2733p"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_httun")
+To = SubResource("Resource_e3qap")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_7sblb"]
+script = ExtResource("2_jjq1h")
+Description = "Talked to green"
+Id = "Cm2zBRfypZ"
+Optional = true
+GraphEditorPosition = Vector2(680, 1220)
+
+[sub_resource type="Resource" id="Resource_42rit"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_7sblb")
+To = SubResource("Resource_qa3dr")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_u6c3y"]
+script = ExtResource("4_qgjvj")
+Type = "variable"
+Key = "game_state"
+Id = "PtOPHkqhyc"
+Optional = false
+GraphEditorPosition = Vector2(140, 1280)
+metadata/Value = 2
+
+[sub_resource type="Resource" id="Resource_gud0j"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_u6c3y")
+To = SubResource("Resource_7sblb")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_tqimd"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_b8hpm")
+To = SubResource("Resource_7sblb")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_ilbho"]
+script = ExtResource("6_itrr3")
+Type = "variable"
+Key = "red_speak"
+Id = "w19wkB9dYH"
+Optional = false
+GraphEditorPosition = Vector2(1500, 1360)
+metadata/Value = "Thanks for talking to green!"
+
+[sub_resource type="Resource" id="Resource_k0j7o"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_7sblb")
+To = SubResource("Resource_ilbho")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_dqxgg"]
+script = ExtResource("2_jjq1h")
+Description = "I'm not green"
+Id = "rBpXo2K3XN"
+Optional = true
+GraphEditorPosition = Vector2(680, 700)
+
+[sub_resource type="Resource" id="Resource_4h8j4"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_b8hpm")
+To = SubResource("Resource_dqxgg")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_kjnmb"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_dqxgg")
+To = SubResource("Resource_qa3dr")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_8tdih"]
+script = ExtResource("4_qgjvj")
+Type = "variable"
+Key = "game_state"
+Id = "VBFbVFdhnf"
+Optional = false
+GraphEditorPosition = Vector2(100, 960)
+metadata/Value = 1
+
+[sub_resource type="Resource" id="Resource_8xqus"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_8tdih")
+To = SubResource("Resource_dqxgg")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_fppd0"]
+script = ExtResource("6_itrr3")
+Type = "variable"
+Key = "game_state"
+Id = "14UCVMU7VO"
+Optional = false
+GraphEditorPosition = Vector2(1940, 340)
+metadata/Value = 1
+
+[sub_resource type="Resource" id="Resource_iy6mb"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_httun")
+To = SubResource("Resource_fppd0")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_36cnl"]
+script = ExtResource("6_itrr3")
+Type = "variable"
+Key = "red_speak"
+Id = ""
+Optional = false
+GraphEditorPosition = Vector2(1520, 780)
+metadata/Value = "Talk with green, not me!"
+
+[sub_resource type="Resource" id="Resource_wsytb"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_dqxgg")
+To = SubResource("Resource_36cnl")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_2jg7g"]
+script = ExtResource("4_qgjvj")
+Type = "variable"
+Key = "game_state"
+Id = "8WgfZ99cHf"
+Optional = false
+GraphEditorPosition = Vector2(140, 1680)
+metadata/Value = 3
+
+[sub_resource type="Resource" id="Resource_suosn"]
+script = ExtResource("2_jjq1h")
+Description = "Leave me alone!"
+Id = "3JToo1V_cW"
+Optional = true
+GraphEditorPosition = Vector2(680, 1780)
+
+[sub_resource type="Resource" id="Resource_5yumh"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_2jg7g")
+To = SubResource("Resource_suosn")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_77y3b"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_b8hpm")
+To = SubResource("Resource_suosn")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_67ptd"]
+script = ExtResource("6_itrr3")
+Type = "variable"
+Key = "red_speak"
+Id = "1tNQh2BvmE"
+Optional = false
+GraphEditorPosition = Vector2(1500, 1740)
+metadata/Value = "Leave me alone!"
+
+[sub_resource type="Resource" id="Resource_xlls1"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_suosn")
+To = SubResource("Resource_67ptd")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_ff4k7"]
+script = ExtResource("6_itrr3")
+Type = "variable"
+Key = "game_state"
+Id = "Atsajc5D_H"
+Optional = false
+GraphEditorPosition = Vector2(1920, 1200)
+metadata/Value = 3
+
+[sub_resource type="Resource" id="Resource_neuph"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_7sblb")
+To = SubResource("Resource_ff4k7")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_lsa51"]
+script = ExtResource("3_277wn")
+From = SubResource("Resource_suosn")
+To = SubResource("Resource_qa3dr")
+edgeType = 0
+
+[resource]
+script = ExtResource("6_8l2sh")
+Nodes = [SubResource("Resource_b8hpm"), SubResource("Resource_httun"), SubResource("Resource_uwr6g"), SubResource("Resource_7sblb"), SubResource("Resource_dqxgg"), SubResource("Resource_u6c3y"), SubResource("Resource_8tdih"), SubResource("Resource_fppd0"), SubResource("Resource_e3qap"), SubResource("Resource_36cnl"), SubResource("Resource_suosn"), SubResource("Resource_2jg7g"), SubResource("Resource_67ptd"), SubResource("Resource_ilbho"), SubResource("Resource_ff4k7"), SubResource("Resource_qa3dr")]
+Edges = [SubResource("Resource_x12uc"), SubResource("Resource_jnmqf"), SubResource("Resource_rnwk1"), SubResource("Resource_2733p"), SubResource("Resource_42rit"), SubResource("Resource_gud0j"), SubResource("Resource_tqimd"), SubResource("Resource_k0j7o"), SubResource("Resource_4h8j4"), SubResource("Resource_kjnmb"), SubResource("Resource_8xqus"), SubResource("Resource_iy6mb"), SubResource("Resource_wsytb"), SubResource("Resource_5yumh"), SubResource("Resource_77y3b"), SubResource("Resource_xlls1"), SubResource("Resource_neuph"), SubResource("Resource_lsa51")]
