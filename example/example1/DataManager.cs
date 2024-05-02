@@ -13,9 +13,8 @@ public partial class DataManager : Node
 
     public override void _Ready()
     {
-        QuestManager.GetInstance().ConditionQueryRequested += (string type, string key, Variant value, QuestResource requester) =>
+        QuestManager.GetInstance().ConditionQueryRequested += (string type, string key, Variant value, QuestCondition requester) =>
         {
-            GD.Print("DataManager: ConditionQueryRequested: ", type, key, value);
             if (type == "variable")
             {
                 if (GetValue(key).Equals(value))

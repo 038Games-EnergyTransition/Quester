@@ -83,7 +83,7 @@ public partial class QuestResource : Resource
         Array<QuestObjective> objectives = new Array<QuestObjective>();
         foreach (QuestNode node in Nodes)
         {
-            if (node is QuestObjective && node.Active)
+            if (node is QuestObjective && (node as QuestObjective).Active)
             {
                 objectives.Add(node as QuestObjective);
             }
@@ -138,6 +138,7 @@ public partial class QuestResource : Resource
     public void CompleteQuest()
     {
         Completed = true;
+        _startNode.Active = false;
         // DONE: Emit signal to notify that the quest has been completed.
         QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestCompleted, this);
     }

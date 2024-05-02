@@ -6,6 +6,8 @@ public partial class Game : Control
     [ExportCategory("Quest Data")]
     [Export]
     public QuestResource Quest;
+    [Export]
+    public DataManager _dataManager;
 
     [ExportCategory("UI Elements")]
     [Export]
@@ -13,13 +15,14 @@ public partial class Game : Control
     [Export]
     public Label labelQuestPoints;
     [Export]
+    public Label labelQuestObjective;
+    [Export]
     public Button buttonStartQuest;
     [Export]
     public Button buttonAddPoint;
 
     private QuestResource _quest;
     private QuestManager _questManager = QuestManager.GetInstance(); // (QuestManager)Engine.GetSingleton("QuestManager");
-    private DataManager _dataManager = DataManager.GetInstance();
     private string _questStatusText;
     private int _numPoints = 0;
 
@@ -31,6 +34,13 @@ public partial class Game : Control
             GD.PrintErr("No quest assigned!");
             missing = true;
         }
+
+        if (_dataManager == null)
+        {
+            GD.PrintErr("No DataManager assigned!");
+            missing = true;
+        }
+
         if (labelQuestStatus == null)
         {
             GD.PrintErr("Missing node Label QuestStatus");
@@ -40,6 +50,12 @@ public partial class Game : Control
         if (labelQuestPoints == null)
         {
             GD.PrintErr("Missing node Label QuestPoints");
+            missing = true;
+        }
+
+        if (labelQuestObjective == null)
+        {
+            GD.PrintErr("Missing node Label QuestObjective");
             missing = true;
         }
 
@@ -64,6 +80,8 @@ public partial class Game : Control
 
         _questStatusText = "Quest not started";
 
+        labelQuestObjective.Text = "Objective: None";
+
         buttonStartQuest.Pressed += () =>
         {
             _questManager.StartQuest(_quest);
@@ -79,20 +97,23 @@ public partial class Game : Control
         _questManager.QuestStarted += (QuestResource qr) =>
         {
             GD.Print("Quest started");
+            _numPoints = 0;
             _questStatusText = $"{qr.Name} - {qr.Description}";
         };
 
         _questManager.QuestObjectiveAdded += (QuestResource qr, QuestObjective qo) =>
         {
             GD.Print("Quest objective added");
+            labelQuestObjective.Text = "Objective: " + qo.Description;
         };
 
         _questManager.QuestObjectiveCompleted += (QuestResource qr, QuestObjective qo) =>
         {
             GD.Print("Quest objective completed");
+            labelQuestObjective.Text = "Objective: None";
         };
 
-        _questManager.QuestCompleted += (QuesterSettings qs) =>
+        _questManager.QuestCompleted += (QuestResource qs) =>
         {
             GD.Print("Quest completed");
             _questStatusText = "Quest completed";
@@ -101,11 +122,12 @@ public partial class Game : Control
 
     public override void _Process(double delta)
     {
-        if (Quest == null)
+        if (Quest == null || _dataManager == null)
         {
             return;
         }
-        if (labelQuestStatus == null || labelQuestPoints == null)
+
+        if (labelQuestStatus == null || labelQuestPoints == null || labelQuestObjective == null)
         {
             return;
         }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://wpm7y576dktv"]
+[gd_scene load_steps=4 format=3 uid="uid://wpm7y576dktv"]
 
 [ext_resource type="Script" path="res://addons/quester/example/example1/Game.cs" id="1_82w5g"]
 [ext_resource type="Resource" uid="uid://bnijx73ro5f44" path="res://addons/quester/example/example1/quest.tres" id="2_xgbqj"]
+[ext_resource type="Script" path="res://addons/quester/example/example1/DataManager.cs" id="3_mwucb"]
 
-[node name="Game" type="Control" node_paths=PackedStringArray("labelQuestStatus", "labelQuestPoints", "buttonStartQuest", "buttonAddPoint")]
+[node name="Game" type="Control" node_paths=PackedStringArray("_dataManager", "labelQuestStatus", "labelQuestPoints", "labelQuestObjective", "buttonStartQuest", "buttonAddPoint")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,10 +13,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_82w5g")
 Quest = ExtResource("2_xgbqj")
-labelQuestStatus = NodePath("GridContainer/LabelQuestStatus")
-labelQuestPoints = NodePath("GridContainer/LabelQuestPoints")
-buttonStartQuest = NodePath("GridContainer/ButtonStart")
-buttonAddPoint = NodePath("GridContainer/ButtonAddPoint")
+_dataManager = NodePath("DataManager")
+labelQuestStatus = NodePath("VBoxContainer/HBoxContainer/LabelQuestStatus")
+labelQuestPoints = NodePath("VBoxContainer/HBoxContainer/LabelQuestPoints")
+labelQuestObjective = NodePath("VBoxContainer/HBoxContainer3/LabelObjective")
+buttonStartQuest = NodePath("VBoxContainer/HBoxContainer2/ButtonStart")
+buttonAddPoint = NodePath("VBoxContainer/HBoxContainer2/ButtonAddPoint")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -25,43 +28,60 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -98.0
-offset_top = -29.0
-offset_right = 98.0
-offset_bottom = 29.0
+offset_left = -96.0
+offset_top = -42.5
+offset_right = 96.0
+offset_bottom = 42.5
 grow_horizontal = 2
 grow_vertical = 2
-columns = 3
 
-[node name="LabelQuestStatus" type="Label" parent="GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelQuestStatus" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "{{STATUS}}"
 horizontal_alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="GridContainer"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="LabelQuestPoints" type="Label" parent="GridContainer"]
+[node name="LabelQuestPoints" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "{{POINTS}}"
 horizontal_alignment = 1
 
-[node name="ButtonStart" type="Button" parent="GridContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonStart" type="Button" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Start Quest"
 
-[node name="VSeparator2" type="VSeparator" parent="GridContainer"]
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 
-[node name="ButtonAddPoint" type="Button" parent="GridContainer"]
+[node name="ButtonAddPoint" type="Button" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Add point"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelObjective" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "{{OBJECTIVE}}"
+horizontal_alignment = 1
+
+[node name="DataManager" type="Node" parent="."]
+script = ExtResource("3_mwucb")

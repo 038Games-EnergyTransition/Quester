@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=14 format=3 uid="uid://bnijx73ro5f44"]
+[gd_resource type="Resource" load_steps=18 format=3 uid="uid://bnijx73ro5f44"]
 
 [ext_resource type="Script" path="res://addons/quester/scripts/model/QuestCondition.cs" id="1_ee1wr"]
 [ext_resource type="Script" path="res://addons/quester/scripts/model/QuestObjective.cs" id="2_t4uiu"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://addons/quester/scripts/model/QuestEnd.cs" id="5_26ebp"]
 [ext_resource type="Script" path="res://addons/quester/scripts/model/QuestResource.cs" id="6_0i2cr"]
 
-[sub_resource type="Resource" id="Resource_acsw3"]
+[sub_resource type="Resource" id="Resource_xatf7"]
 script = ExtResource("1_ee1wr")
 Type = "variable"
 Key = "target_num_points"
@@ -16,20 +16,20 @@ Optional = false
 GraphEditorPosition = Vector2(220, 600)
 metadata/Value = 5
 
-[sub_resource type="Resource" id="Resource_aoiwe"]
+[sub_resource type="Resource" id="Resource_bwij7"]
 script = ExtResource("2_t4uiu")
-Description = "Collected required coins?"
+Description = "Collect 5 points"
 Id = "4QqcN97IQ3"
 Optional = false
 GraphEditorPosition = Vector2(800, 200)
 
-[sub_resource type="Resource" id="Resource_kb6n0"]
+[sub_resource type="Resource" id="Resource_6niau"]
 script = ExtResource("3_excr2")
-From = SubResource("Resource_acsw3")
-To = SubResource("Resource_aoiwe")
+From = SubResource("Resource_xatf7")
+To = SubResource("Resource_bwij7")
 edgeType = 1
 
-[sub_resource type="Resource" id="Resource_eiexk"]
+[sub_resource type="Resource" id="Resource_mo177"]
 script = ExtResource("4_ytcwp")
 Name = "Collect points"
 Description = "Collect a few points!"
@@ -37,25 +37,53 @@ Id = "g7mmdaA3Zr"
 Optional = false
 GraphEditorPosition = Vector2(320, 200)
 
-[sub_resource type="Resource" id="Resource_7fy05"]
+[sub_resource type="Resource" id="Resource_xgo3a"]
 script = ExtResource("3_excr2")
-From = SubResource("Resource_eiexk")
-To = SubResource("Resource_aoiwe")
+From = SubResource("Resource_mo177")
+To = SubResource("Resource_bwij7")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_hm7fm"]
+[sub_resource type="Resource" id="Resource_rqfhw"]
+script = ExtResource("2_t4uiu")
+Description = "Collect 10 points"
+Id = "X547P4EDMt"
+Optional = false
+GraphEditorPosition = Vector2(1600, 200)
+
+[sub_resource type="Resource" id="Resource_0lb1u"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_bwij7")
+To = SubResource("Resource_rqfhw")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_cev6j"]
 script = ExtResource("5_26ebp")
 Id = "f0_aNrTB8h"
 Optional = false
-GraphEditorPosition = Vector2(1400, 200)
+GraphEditorPosition = Vector2(2200, 200)
 
-[sub_resource type="Resource" id="Resource_o8p5i"]
+[sub_resource type="Resource" id="Resource_w8s0b"]
 script = ExtResource("3_excr2")
-From = SubResource("Resource_aoiwe")
-To = SubResource("Resource_hm7fm")
+From = SubResource("Resource_rqfhw")
+To = SubResource("Resource_cev6j")
 edgeType = 0
+
+[sub_resource type="Resource" id="Resource_gqb0h"]
+script = ExtResource("1_ee1wr")
+Type = "variable"
+Key = "target_num_points"
+Id = "oUPd0NO1Rg"
+Optional = false
+GraphEditorPosition = Vector2(880, 760)
+metadata/Value = 10
+
+[sub_resource type="Resource" id="Resource_4flvx"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_gqb0h")
+To = SubResource("Resource_rqfhw")
+edgeType = 1
 
 [resource]
 script = ExtResource("6_0i2cr")
-Nodes = [SubResource("Resource_eiexk"), SubResource("Resource_acsw3"), SubResource("Resource_hm7fm"), SubResource("Resource_aoiwe")]
-Edges = [SubResource("Resource_kb6n0"), SubResource("Resource_7fy05"), SubResource("Resource_o8p5i")]
+Nodes = [SubResource("Resource_mo177"), SubResource("Resource_xatf7"), SubResource("Resource_bwij7"), SubResource("Resource_rqfhw"), SubResource("Resource_cev6j"), SubResource("Resource_gqb0h")]
+Edges = [SubResource("Resource_6niau"), SubResource("Resource_xgo3a"), SubResource("Resource_0lb1u"), SubResource("Resource_w8s0b"), SubResource("Resource_4flvx")]

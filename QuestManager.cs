@@ -7,7 +7,7 @@ using Godot;
 public partial class QuestManager : Node
 {
     [Signal]
-    public delegate void ConditionQueryRequestedEventHandler(string type, string key, Variant value, QuestResource requester);
+    public delegate void ConditionQueryRequestedEventHandler(string type, string key, Variant value, QuestCondition requester);
     [Signal]
     public delegate void QuestStartedEventHandler(QuestResource quest);
     [Signal]
@@ -16,7 +16,7 @@ public partial class QuestManager : Node
     public delegate void QuestObjectiveCompletedEventHandler(QuestResource quest, QuestObjective objective);
 
     [Signal]
-    public delegate void QuestCompletedEventHandler(QuesterSettings quest);
+    public delegate void QuestCompletedEventHandler(QuestResource quest);
 
     private List<QuestResource> _quests = new List<QuestResource>();
     private Timer _questUpdateTimer;
