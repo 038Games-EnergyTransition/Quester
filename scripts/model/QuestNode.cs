@@ -62,28 +62,12 @@ public partial class QuestNode : Resource
 
     public void Update()
     {
-        string name = "-";
-        name = this is QuestStart ? "Start" : name;
-        name = this is QuestEnd ? "End" : name;
-        name = this is QuestCondition ? "Condition" : name;
-        name = this is QuestObjective ? "Objective" : name;
-
         if (Completed)
         {
             foreach (QuestNode nextNode in NextNodes)
             {
 
                 Update(nextNode);
-            }
-        } else
-        {
-            foreach (QuestNode node in Graph.Nodes)
-            {
-                if (node.Id == Id)
-                {
-                    GD.Print($"[{name}:{node.Active}]: Update()");
-                    break;
-                }
             }
         }
     }
