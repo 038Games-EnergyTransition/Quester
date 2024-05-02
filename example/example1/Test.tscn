@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b8ectfnffnn7p"]
 
-[ext_resource type="Script" path="res://addons/quester/example/example1/DataManager.cs" id="2_k5psm"]
-[ext_resource type="Resource" uid="uid://bhcw8nnnbyln1" path="res://addons/quester/example/example1/quest.tres" id="2_kvrno"]
+[ext_resource type="Script" path="res://addons/quester/example/DataManager.cs" id="2_k5psm"]
+[ext_resource type="Resource" uid="uid://bnijx73ro5f44" path="res://addons/quester/example/example1/quest.tres" id="2_kvrno"]
 
 [node name="ExampleScene" type="PanelContainer"]
 anchors_preset = 15
