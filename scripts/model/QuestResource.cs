@@ -11,7 +11,12 @@ public partial class QuestResource : Resource
     public Array<QuestEdge> Edges { get; set; } = new Array<QuestEdge>();
 
     private bool _wasInitialized = false;
-    private QuestStart _startNode;
+
+    private QuestStart _intStartNode;
+    private QuestStart _startNode {
+        get { _initialize(); return _intStartNode; }
+        set { _intStartNode = value; }
+    }
 
     public string Name { get { return _startNode.Name; } }
     public string Description { get { return _startNode.Description; } }
@@ -46,14 +51,21 @@ public partial class QuestResource : Resource
         if (!Completed && !Started)
         {
             _startNode.Active = true;
+            _startNode.Completed = true;
             // DONE: Emit signal to notify that the quest has started.
-            EmitSignal(QuestManager.SignalName.QuestStarted, this);
+            QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestStarted, this);
+            //EmitSignal(QuestManager.SignalName.QuestStarted, this);
             NotifyActiveObjectives();
         }
     }
 
     public void Update()
     {
+        if (!Started)
+        {
+            return;
+        }
+
         if (!IsInstance)
         {
             GD.PrintErr("QuestResource: Update() called on non-instance resource.");
@@ -71,7 +83,7 @@ public partial class QuestResource : Resource
         Array<QuestObjective> objectives = new Array<QuestObjective>();
         foreach (QuestNode node in Nodes)
         {
-            if (node is QuestObjective && node.Active)
+            if (node is QuestObjective && (node as QuestObjective).Active)
             {
                 objectives.Add(node as QuestObjective);
             }
@@ -113,21 +125,22 @@ public partial class QuestResource : Resource
     public void RequestQuery(string type, string key, Variant value, QuestCondition requester)
     {
         // DONE: Emit signal to request a query.
-        EmitSignal(QuestManager.SignalName.ConditionQueryRequested, type, key, value, requester);
+        QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.ConditionQueryRequested, type, key, value, requester);
     }
 
     public void CompleteObjective(QuestObjective objective)
     {
         // DONE: Emit signal to notify that an objective has been completed.
-        EmitSignal(QuestManager.SignalName.QuestObjectiveCompleted, this, objective);
+        QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestObjectiveCompleted, this, objective);
         NotifyActiveObjectives();
     }
 
     public void CompleteQuest()
     {
         Completed = true;
+        _startNode.Active = false;
         // DONE: Emit signal to notify that the quest has been completed.
-        EmitSignal(QuestManager.SignalName.QuestCompleted, this);
+        QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestCompleted, this);
     }
 
     public Dictionary Serialize()
@@ -193,7 +206,7 @@ public partial class QuestResource : Resource
         foreach (QuestObjective objective in GetActiveObjectives())
         {
             // DONE: Emit signal to notify that a new objective has been added.
-            EmitSignal(QuestManager.SignalName.QuestObjectiveAdded, this, objective);
+            QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestObjectiveAdded, this, objective);
         }
     }
 }

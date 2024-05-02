@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8ectfnffnn7p"]
+
+[ext_resource type="Script" path="res://addons/quester/example/example1/DataManager.cs" id="2_k5psm"]
+[ext_resource type="Resource" uid="uid://bhcw8nnnbyln1" path="res://addons/quester/example/example1/quest.tres" id="2_kvrno"]
+
+[node name="ExampleScene" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+quest = ExtResource("2_kvrno")
+
+[node name="DataManager" type="Node" parent="."]
+script = ExtResource("2_k5psm")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="CurrentQuest" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CurrentQuest"]
+layout_mode = 2
+text = "Current Quest:"
+
+[node name="CurrentQuestLabel" type="Label" parent="MarginContainer/VBoxContainer/CurrentQuest"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CurrentObjectives" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CurrentObjectives"]
+layout_mode = 2
+text = "Current Objectives:"
+
+[node name="Objectives" type="ItemList" parent="MarginContainer/VBoxContainer/CurrentObjectives"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+auto_height = true
+
+[node name="FirstButton" type="Button" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("data_manager")]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Press the button!"
+
+[node name="SecondButtonContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LeftButton" type="Button" parent="MarginContainer/VBoxContainer/SecondButtonContainer" node_paths=PackedStringArray("data_manager")]
+layout_mode = 2
+text = "Left Button"
+
+[node name="RightButton" type="Button" parent="MarginContainer/VBoxContainer/SecondButtonContainer" node_paths=PackedStringArray("data_manager")]
+layout_mode = 2
+text = "Right Button"

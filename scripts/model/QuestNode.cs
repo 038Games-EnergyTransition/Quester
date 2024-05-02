@@ -66,8 +66,32 @@ public partial class QuestNode : Resource
         {
             foreach (QuestNode nextNode in NextNodes)
             {
-                nextNode.Update();
+
+                Update(nextNode);
             }
+        }
+    }
+
+    public void Update(QuestNode node)
+    {
+        if (node is QuestStart)
+        {
+            (node as QuestStart).Update();
+        }
+
+        if (node is QuestObjective)
+        {
+            (node as QuestObjective).Update();
+        }
+
+        if (node is QuestEnd)
+        {
+            (node as QuestEnd).Update();
+        }
+
+        if (node is QuestCondition)
+        {
+            (node as QuestCondition).Update();
         }
     }
 

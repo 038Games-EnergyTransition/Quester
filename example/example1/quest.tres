@@ -1,0 +1,203 @@
+[gd_resource type="Resource" load_steps=34 format=3 uid="uid://bnijx73ro5f44"]
+
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestCondition.cs" id="1_ee1wr"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestObjective.cs" id="2_t4uiu"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestEdge.cs" id="3_excr2"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestStart.cs" id="4_ytcwp"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestEnd.cs" id="5_26ebp"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestResource.cs" id="6_0i2cr"]
+
+[sub_resource type="Resource" id="Resource_7etai"]
+script = ExtResource("1_ee1wr")
+Type = "variable"
+Key = "target_num_red"
+Id = "zzTMPjLmSD"
+Optional = false
+GraphEditorPosition = Vector2(220, 600)
+metadata/Value = 5
+
+[sub_resource type="Resource" id="Resource_1ftd2"]
+script = ExtResource("2_t4uiu")
+Description = "Red = 5"
+Id = "4QqcN97IQ3"
+Optional = false
+GraphEditorPosition = Vector2(800, 200)
+
+[sub_resource type="Resource" id="Resource_fvi4f"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_7etai")
+To = SubResource("Resource_1ftd2")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_m83e5"]
+script = ExtResource("4_ytcwp")
+Name = "Collect points"
+Description = "Two objectives"
+Id = "g7mmdaA3Zr"
+Optional = false
+GraphEditorPosition = Vector2(320, 200)
+
+[sub_resource type="Resource" id="Resource_fm3hc"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_m83e5")
+To = SubResource("Resource_1ftd2")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_wxc86"]
+script = ExtResource("2_t4uiu")
+Description = "Blue = 10"
+Id = "X547P4EDMt"
+Optional = false
+GraphEditorPosition = Vector2(1600, 200)
+
+[sub_resource type="Resource" id="Resource_5d31k"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_1ftd2")
+To = SubResource("Resource_wxc86")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_7nlpv"]
+script = ExtResource("1_ee1wr")
+Type = "variable"
+Key = "target_num_blue"
+Id = "oUPd0NO1Rg"
+Optional = false
+GraphEditorPosition = Vector2(880, 760)
+metadata/Value = 10
+
+[sub_resource type="Resource" id="Resource_lgapg"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_7nlpv")
+To = SubResource("Resource_wxc86")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_xly40"]
+script = ExtResource("2_t4uiu")
+Description = "Blue = 15"
+Id = "_37HCEVpzV"
+Optional = false
+GraphEditorPosition = Vector2(2340, 60)
+
+[sub_resource type="Resource" id="Resource_ujc8g"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_wxc86")
+To = SubResource("Resource_xly40")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_visew"]
+script = ExtResource("2_t4uiu")
+Description = "Green = 5"
+Id = "gwntXQdMp_"
+Optional = false
+GraphEditorPosition = Vector2(2340, 720)
+
+[sub_resource type="Resource" id="Resource_imm2f"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_wxc86")
+To = SubResource("Resource_visew")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_2o2x7"]
+script = ExtResource("1_ee1wr")
+Type = "variable"
+Key = "target_num_green"
+Id = "xF20T-brV0"
+Optional = false
+GraphEditorPosition = Vector2(1820, 900)
+metadata/Value = 5
+
+[sub_resource type="Resource" id="Resource_yvd6v"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_2o2x7")
+To = SubResource("Resource_visew")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_mbf78"]
+script = ExtResource("1_ee1wr")
+Type = "variable"
+Key = "target_num_blue"
+Id = "A3pmp8q3wF"
+Optional = false
+GraphEditorPosition = Vector2(1700, -160)
+metadata/Value = 15
+
+[sub_resource type="Resource" id="Resource_g1i01"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_mbf78")
+To = SubResource("Resource_xly40")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_bqtnx"]
+script = ExtResource("2_t4uiu")
+Description = "All = 20"
+Id = "EH90I5xs4f"
+Optional = false
+GraphEditorPosition = Vector2(3660, 160)
+
+[sub_resource type="Resource" id="Resource_73tpl"]
+script = ExtResource("5_26ebp")
+Id = "f0_aNrTB8h"
+Optional = false
+GraphEditorPosition = Vector2(4260, 200)
+
+[sub_resource type="Resource" id="Resource_35nxc"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_bqtnx")
+To = SubResource("Resource_73tpl")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_hfb0x"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_xly40")
+To = SubResource("Resource_bqtnx")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_me2kw"]
+script = ExtResource("1_ee1wr")
+Type = "variable"
+Key = "target_num_red"
+Id = "uIxdo8BR-r"
+Optional = false
+GraphEditorPosition = Vector2(2900, 220)
+metadata/Value = 20
+
+[sub_resource type="Resource" id="Resource_c1ifl"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_me2kw")
+To = SubResource("Resource_bqtnx")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_q4sas"]
+script = ExtResource("1_ee1wr")
+Type = "variable"
+Key = "target_num_blue"
+Id = "IxPng9Hsw7"
+Optional = false
+GraphEditorPosition = Vector2(2900, 560)
+metadata/Value = 20
+
+[sub_resource type="Resource" id="Resource_3ltyy"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_q4sas")
+To = SubResource("Resource_bqtnx")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_ij1p0"]
+script = ExtResource("1_ee1wr")
+Type = "variable"
+Key = "target_num_green"
+Id = "R1QH60SNmf"
+Optional = false
+GraphEditorPosition = Vector2(2900, 900)
+metadata/Value = 20
+
+[sub_resource type="Resource" id="Resource_fenpq"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_ij1p0")
+To = SubResource("Resource_bqtnx")
+edgeType = 1
+
+[resource]
+script = ExtResource("6_0i2cr")
+Nodes = [SubResource("Resource_m83e5"), SubResource("Resource_1ftd2"), SubResource("Resource_wxc86"), SubResource("Resource_7nlpv"), SubResource("Resource_xly40"), SubResource("Resource_visew"), SubResource("Resource_2o2x7"), SubResource("Resource_mbf78"), SubResource("Resource_ij1p0"), SubResource("Resource_73tpl"), SubResource("Resource_bqtnx"), SubResource("Resource_7etai"), SubResource("Resource_me2kw"), SubResource("Resource_q4sas")]
+Edges = [SubResource("Resource_fvi4f"), SubResource("Resource_fm3hc"), SubResource("Resource_5d31k"), SubResource("Resource_lgapg"), SubResource("Resource_ujc8g"), SubResource("Resource_imm2f"), SubResource("Resource_yvd6v"), SubResource("Resource_g1i01"), SubResource("Resource_35nxc"), SubResource("Resource_hfb0x"), SubResource("Resource_c1ifl"), SubResource("Resource_3ltyy"), SubResource("Resource_fenpq")]

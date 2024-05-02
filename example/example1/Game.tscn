@@ -1,0 +1,309 @@
+[gd_scene load_steps=16 format=3 uid="uid://wpm7y576dktv"]
+
+[ext_resource type="Script" path="res://addons/quester/example/example1/Game.cs" id="1_82w5g"]
+[ext_resource type="Resource" uid="uid://bnijx73ro5f44" path="res://addons/quester/example/example1/quest.tres" id="2_xgbqj"]
+[ext_resource type="Script" path="res://addons/quester/example/example1/DataManager.cs" id="3_mwucb"]
+[ext_resource type="Script" path="res://addons/quester/example/example1/IncrementButton.cs" id="4_i1ngf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kri6f"]
+bg_color = Color(0.109804, 0.109804, 0.109804, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t6ej"]
+bg_color = Color(0.235294, 0.423529, 0.160784, 1)
+border_width_bottom = 4
+border_color = Color(0.14902, 0.258824, 0.0901961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6s72y"]
+bg_color = Color(0.235294, 0.423529, 0.160784, 1)
+border_width_bottom = 2
+border_color = Color(0.14902, 0.258824, 0.0901961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnna2"]
+bg_color = Color(0.235294, 0.423529, 0.160784, 1)
+border_color = Color(0.14902, 0.258824, 0.0901961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tky3"]
+bg_color = Color(0.356863, 0.376471, 0.333333, 1)
+border_width_bottom = 4
+border_color = Color(0.231373, 0.223529, 0.2, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qaain"]
+bg_color = Color(0.235294, 0.423529, 0.160784, 1)
+border_width_bottom = 2
+border_color = Color(0.14902, 0.258824, 0.0901961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6mqx"]
+bg_color = Color(0.666667, 0.67451, 0.65098, 1)
+border_width_bottom = 8
+border_color = Color(0.329412, 0.32549, 0.313726, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0t0t"]
+bg_color = Color(0.666667, 0.67451, 0.65098, 1)
+border_width_bottom = 5
+border_color = Color(0.329412, 0.32549, 0.313726, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evl8e"]
+bg_color = Color(0.666667, 0.67451, 0.65098, 1)
+border_color = Color(0.329412, 0.32549, 0.313726, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obtev"]
+bg_color = Color(0.14902, 0.152941, 0.141176, 1)
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhrhl"]
+bg_color = Color(0.666667, 0.67451, 0.65098, 1)
+border_width_bottom = 5
+border_color = Color(0.329412, 0.32549, 0.313726, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[node name="Game" type="Control" node_paths=PackedStringArray("_dataManager", "labelQuestStatus", "labelQuestObjective", "buttonStartQuest")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_82w5g")
+Quest = ExtResource("2_xgbqj")
+_dataManager = NodePath("DataManager")
+labelQuestStatus = NodePath("QuestData/VBoxContainer/QuestManager/HBoxContainer/VBoxContainer2/LabelQuestStatus")
+labelQuestObjective = NodePath("QuestData/VBoxContainer/QuestManager/HBoxContainer/VBoxContainer2/LabelObjective")
+buttonStartQuest = NodePath("QuestData/VBoxContainer/QuestManager/ButtonStart")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DataManager" type="Node" parent="."]
+script = ExtResource("3_mwucb")
+
+[node name="QuestData" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -374.0
+offset_top = -135.0
+offset_right = 374.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kri6f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuestData"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuestManager" type="VBoxContainer" parent="QuestData/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonStart" type="Button" parent="QuestData/VBoxContainer/QuestManager"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_6t6ej")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6s72y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pnna2")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2tky3")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qaain")
+text = "Start Quest"
+
+[node name="HSeparator" type="HSeparator" parent="QuestData/VBoxContainer/QuestManager"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="QuestData/VBoxContainer/QuestManager"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuestData/VBoxContainer/QuestManager/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label1" type="Label" parent="QuestData/VBoxContainer/QuestManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quest status"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="QuestData/VBoxContainer/QuestManager/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quest objective"
+horizontal_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="QuestData/VBoxContainer/QuestManager/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="QuestData/VBoxContainer/QuestManager/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelQuestStatus" type="Label" parent="QuestData/VBoxContainer/QuestManager/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "{{STATUS}}"
+
+[node name="LabelObjective" type="Label" parent="QuestData/VBoxContainer/QuestManager/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "{{OBJECTIVE}}"
+
+[node name="HSeparator" type="HSeparator" parent="QuestData/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuestItems" type="HBoxContainer" parent="QuestData/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RedButton" type="Button" parent="QuestData/VBoxContainer/QuestItems" node_paths=PackedStringArray("labelValue", "_dataManager")]
+self_modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_n6mqx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m0t0t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_evl8e")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_obtev")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bhrhl")
+script = ExtResource("4_i1ngf")
+TargetQuestKey = "target_num_red"
+labelValue = NodePath("Label")
+_dataManager = NodePath("../../../../DataManager")
+
+[node name="Label" type="Label" parent="QuestData/VBoxContainer/QuestItems/RedButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.5
+offset_top = -18.0
+offset_right = 22.5
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 26
+text = "000"
+horizontal_alignment = 1
+
+[node name="BlueButton" type="Button" parent="QuestData/VBoxContainer/QuestItems" node_paths=PackedStringArray("labelValue", "_dataManager")]
+self_modulate = Color(0, 0, 1, 1)
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_n6mqx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m0t0t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_evl8e")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_obtev")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bhrhl")
+script = ExtResource("4_i1ngf")
+TargetQuestKey = "target_num_blue"
+labelValue = NodePath("Label")
+_dataManager = NodePath("../../../../DataManager")
+
+[node name="Label" type="Label" parent="QuestData/VBoxContainer/QuestItems/BlueButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.5
+offset_top = -18.0
+offset_right = 22.5
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 26
+text = "000"
+horizontal_alignment = 1
+
+[node name="GreenButton" type="Button" parent="QuestData/VBoxContainer/QuestItems" node_paths=PackedStringArray("labelValue", "_dataManager")]
+self_modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_n6mqx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m0t0t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_evl8e")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_obtev")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bhrhl")
+script = ExtResource("4_i1ngf")
+TargetQuestKey = "target_num_green"
+labelValue = NodePath("Label")
+_dataManager = NodePath("../../../../DataManager")
+
+[node name="Label" type="Label" parent="QuestData/VBoxContainer/QuestItems/GreenButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.5
+offset_top = -18.0
+offset_right = 22.5
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 26
+text = "000"
+horizontal_alignment = 1

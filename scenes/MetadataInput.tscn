@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/quester/scripts/components/Vector2Input.cs" id="2_qj8h8"]
 [ext_resource type="Script" path="res://addons/quester/scripts/components/Vector3Input.cs" id="3_4c4m8"]
 
-[sub_resource type="Image" id="Image_s3ns1"]
+[sub_resource type="Image" id="Image_83kp5"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -13,14 +13,20 @@ data = {
 "width": 16
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_q5d4m"]
-image = SubResource("Image_s3ns1")
+[sub_resource type="ImageTexture" id="ImageTexture_833ro"]
+image = SubResource("Image_83kp5")
 
-[node name="MetadataInput" type="HBoxContainer" node_paths=PackedStringArray("typeSelect", "inputsContainer")]
+[node name="MetadataInput" type="HBoxContainer" node_paths=PackedStringArray("typeSelect", "inputsContainer", "boolInput", "stringInput", "vector2Input", "vector3Input", "intInput", "floatInput")]
 custom_minimum_size = Vector2(0, 32)
 script = ExtResource("1_hi58p")
 typeSelect = NodePath("MetaTypeSelect")
 inputsContainer = NodePath("InputsContainer")
+boolInput = NodePath("InputsContainer/BoolValue")
+stringInput = NodePath("InputsContainer/StringValue")
+vector2Input = NodePath("InputsContainer/Vector2Value")
+vector3Input = NodePath("InputsContainer/Vector3Value")
+intInput = NodePath("InputsContainer/IntegerValue")
+floatInput = NodePath("InputsContainer/FloatValue")
 
 [node name="MetaTypeSelect" type="OptionButton" parent="."]
 custom_minimum_size = Vector2(100, 0)
@@ -28,22 +34,22 @@ layout_mode = 2
 item_count = 6
 selected = 0
 popup/item_0/text = "Boolean"
-popup/item_0/icon = SubResource("ImageTexture_q5d4m")
+popup/item_0/icon = SubResource("ImageTexture_833ro")
 popup/item_0/id = 0
 popup/item_1/text = "String"
-popup/item_1/icon = SubResource("ImageTexture_q5d4m")
+popup/item_1/icon = SubResource("ImageTexture_833ro")
 popup/item_1/id = 1
 popup/item_2/text = "Vector2"
-popup/item_2/icon = SubResource("ImageTexture_q5d4m")
+popup/item_2/icon = SubResource("ImageTexture_833ro")
 popup/item_2/id = 2
 popup/item_3/text = "Vector3"
-popup/item_3/icon = SubResource("ImageTexture_q5d4m")
+popup/item_3/icon = SubResource("ImageTexture_833ro")
 popup/item_3/id = 3
 popup/item_4/text = "Integer"
-popup/item_4/icon = SubResource("ImageTexture_q5d4m")
+popup/item_4/icon = SubResource("ImageTexture_833ro")
 popup/item_4/id = 4
 popup/item_5/text = "Float"
-popup/item_5/icon = SubResource("ImageTexture_q5d4m")
+popup/item_5/icon = SubResource("ImageTexture_833ro")
 popup/item_5/id = 5
 
 [node name="InputsContainer" type="Control" parent="."]
@@ -163,9 +169,3 @@ grow_vertical = 2
 step = 0.01
 allow_greater = true
 allow_lesser = true
-
-[connection signal="item_selected" from="MetaTypeSelect" to="." method="_on_type_selected"]
-[connection signal="toggled" from="InputsContainer/BoolValue" to="." method="_on_value_changed"]
-[connection signal="text_changed" from="InputsContainer/StringValue" to="." method="_on_value_changed"]
-[connection signal="value_changed" from="InputsContainer/IntegerValue" to="." method="_on_value_changed"]
-[connection signal="value_changed" from="InputsContainer/FloatValue" to="." method="_on_value_changed"]
