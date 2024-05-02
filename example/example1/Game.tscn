@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://wpm7y576dktv"]
+
+[ext_resource type="Script" path="res://addons/quester/example/example1/Game.cs" id="1_82w5g"]
+[ext_resource type="Resource" uid="uid://bnijx73ro5f44" path="res://addons/quester/example/example1/quest.tres" id="2_xgbqj"]
+
+[node name="Game" type="Control" node_paths=PackedStringArray("labelQuestStatus", "labelQuestPoints", "buttonStartQuest", "buttonAddPoint")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_82w5g")
+Quest = ExtResource("2_xgbqj")
+labelQuestStatus = NodePath("GridContainer/LabelQuestStatus")
+labelQuestPoints = NodePath("GridContainer/LabelQuestPoints")
+buttonStartQuest = NodePath("GridContainer/ButtonStart")
+buttonAddPoint = NodePath("GridContainer/ButtonAddPoint")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -29.0
+offset_right = 98.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="LabelQuestStatus" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "{{STATUS}}"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="GridContainer"]
+layout_mode = 2
+
+[node name="LabelQuestPoints" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "{{POINTS}}"
+horizontal_alignment = 1
+
+[node name="ButtonStart" type="Button" parent="GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Start Quest"
+
+[node name="VSeparator2" type="VSeparator" parent="GridContainer"]
+layout_mode = 2
+
+[node name="ButtonAddPoint" type="Button" parent="GridContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Add point"

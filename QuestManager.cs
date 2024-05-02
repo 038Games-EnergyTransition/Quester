@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Godot;
 
+[Tool]
 public partial class QuestManager : Node
 {
     [Signal]
@@ -20,6 +21,7 @@ public partial class QuestManager : Node
     private List<QuestResource> _quests = new List<QuestResource>();
     private Timer _questUpdateTimer;
 
+    private static QuestManager _instance;
 
     public override void _Ready()
     {
@@ -99,5 +101,14 @@ public partial class QuestManager : Node
         {
             _questUpdateTimer.Paused = !value;
         }
+    }
+
+    public static QuestManager GetInstance()
+    {
+        if (_instance == null)
+        {
+            _instance = new QuestManager();
+        }
+        return _instance;
     }
 }

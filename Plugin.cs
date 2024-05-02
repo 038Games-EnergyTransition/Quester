@@ -10,7 +10,9 @@ public partial class Plugin : EditorPlugin
 
 	public override void _EnterTree()
 	{
-		MainPanelWindow = (QuestEditor)MainPanel.Instantiate();
+		AddAutoloadSingleton("QuestManager", "res://addons/quester/QuestManager.cs");
+
+        MainPanelWindow = (QuestEditor)MainPanel.Instantiate();
 		EditorInterface.Singleton.GetEditorMainScreen().AddChild(MainPanelWindow);
 
 		EngineCS.SetMeta("QuesterPlugin", this);
@@ -24,7 +26,9 @@ public partial class Plugin : EditorPlugin
 
 		EngineCS.RemoveMeta("QuesterPlugin");
 
-		MainPanelWindow.Free();
+		RemoveAutoloadSingleton("QuestManager");
+
+        MainPanelWindow.Free();
 	}
 	public override bool _HasMainScreen()
 	{

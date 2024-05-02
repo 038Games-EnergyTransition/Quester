@@ -19,12 +19,12 @@ public partial class Vector2Input : HBoxContainer
         xValue.ValueChanged += (value) =>
         {
             var newValue = new Vector2((float)value, (float)yValue.Value);
-            EmitSignal(nameof(ValueChangedEventHandler), newValue);
+            EmitSignal(SignalName.ValueChanged, newValue);
         };
         yValue.ValueChanged += (value) =>
         {
             var newValue = new Vector2((float)xValue.Value, (float)value);
-            EmitSignal(nameof(ValueChangedEventHandler), newValue);
+            EmitSignal(SignalName.ValueChanged, newValue);
         };
     }
 

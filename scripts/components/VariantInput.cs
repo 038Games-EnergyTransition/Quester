@@ -13,6 +13,20 @@ public partial class VariantInput : HBoxContainer
     [Export]
     protected Control inputsContainer;
 
+    [ExportCategory("Variants")]
+    [Export]
+    public CheckBox boolInput;
+    [Export]
+    public LineEdit stringInput;
+    [Export]
+    public Vector2Input vector2Input;
+    [Export]
+    public Vector3Input vector3Input;
+    [Export]
+    public SpinBox intInput;
+    [Export]
+    public SpinBox floatInput;
+
     public override void _Ready()
     {
         typeSelect.SetItemIcon(0, GetThemeIcon("bool", "EditorIcons"));
@@ -23,6 +37,12 @@ public partial class VariantInput : HBoxContainer
         typeSelect.SetItemIcon(5, GetThemeIcon("float", "EditorIcons"));
 
         typeSelect.ItemSelected += _onTypeSelected;
+        boolInput.Toggled += _onValueChanged;
+        stringInput.TextChanged += _onValueChanged;
+        vector2Input.ValueChanged += _onValueChanged;
+        vector3Input.ValueChanged += _onValueChanged;
+        intInput.ValueChanged += _onValueChanged;
+        floatInput.ValueChanged += _onValueChanged;
     }
 
     public void SelectType(int index)
@@ -84,9 +104,40 @@ public partial class VariantInput : HBoxContainer
     private void _onTypeSelected(long index) {
         SelectType((int)index);
     }
-        
-        
-    private void _onValueChanged(Variant value) {
+
+    private void _onValueChanged(bool value)
+    {
+        _emitValueChanged(value);
+    }
+
+    private void _onValueChanged(string value)
+    {
+        _emitValueChanged(value);
+    }
+
+    private void _onValueChanged(Vector2 value)
+    {
+        _emitValueChanged(value);
+    }
+
+    private void _onValueChanged(Vector3 value)
+    {
+        _emitValueChanged(value);
+    }
+
+    private void _onValueChanged(double value)
+    {
+        if (value % 1 == 0)
+        {
+            _emitValueChanged((int)value);
+        }
+        else
+        {
+            _emitValueChanged(value);
+        }
+    }
+
+    private void _emitValueChanged(Variant value) {
         EmitSignal(SignalName.ValueChanged, value);
     }
 }

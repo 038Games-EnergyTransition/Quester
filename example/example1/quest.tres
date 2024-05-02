@@ -1,0 +1,61 @@
+[gd_resource type="Resource" load_steps=14 format=3 uid="uid://bnijx73ro5f44"]
+
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestCondition.cs" id="1_ee1wr"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestObjective.cs" id="2_t4uiu"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestEdge.cs" id="3_excr2"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestStart.cs" id="4_ytcwp"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestEnd.cs" id="5_26ebp"]
+[ext_resource type="Script" path="res://addons/quester/scripts/model/QuestResource.cs" id="6_0i2cr"]
+
+[sub_resource type="Resource" id="Resource_acsw3"]
+script = ExtResource("1_ee1wr")
+Type = "variable"
+Key = "target_num_points"
+Id = "zzTMPjLmSD"
+Optional = false
+GraphEditorPosition = Vector2(220, 600)
+metadata/Value = 5
+
+[sub_resource type="Resource" id="Resource_aoiwe"]
+script = ExtResource("2_t4uiu")
+Description = "Collected required coins?"
+Id = "4QqcN97IQ3"
+Optional = false
+GraphEditorPosition = Vector2(800, 200)
+
+[sub_resource type="Resource" id="Resource_kb6n0"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_acsw3")
+To = SubResource("Resource_aoiwe")
+edgeType = 1
+
+[sub_resource type="Resource" id="Resource_eiexk"]
+script = ExtResource("4_ytcwp")
+Name = "Collect points"
+Description = "Collect a few points!"
+Id = "g7mmdaA3Zr"
+Optional = false
+GraphEditorPosition = Vector2(320, 200)
+
+[sub_resource type="Resource" id="Resource_7fy05"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_eiexk")
+To = SubResource("Resource_aoiwe")
+edgeType = 0
+
+[sub_resource type="Resource" id="Resource_hm7fm"]
+script = ExtResource("5_26ebp")
+Id = "f0_aNrTB8h"
+Optional = false
+GraphEditorPosition = Vector2(1400, 200)
+
+[sub_resource type="Resource" id="Resource_o8p5i"]
+script = ExtResource("3_excr2")
+From = SubResource("Resource_aoiwe")
+To = SubResource("Resource_hm7fm")
+edgeType = 0
+
+[resource]
+script = ExtResource("6_0i2cr")
+Nodes = [SubResource("Resource_eiexk"), SubResource("Resource_acsw3"), SubResource("Resource_hm7fm"), SubResource("Resource_aoiwe")]
+Edges = [SubResource("Resource_kb6n0"), SubResource("Resource_7fy05"), SubResource("Resource_o8p5i")]

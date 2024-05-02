@@ -39,7 +39,7 @@ public partial class QuestObjective : QuestNode
         bool justCompleted = false;
         if (Active) {
             foreach (QuestNode condition in Conditions) {
-                condition.Update();
+                Update(condition);
                 if (!condition.Completed) {
                     return;
                 }
