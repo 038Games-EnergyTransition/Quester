@@ -1,5 +1,5 @@
 using Godot;
-using System;
+using Godot.Collections;
 
 public partial class Game : Control
 {
@@ -13,18 +13,15 @@ public partial class Game : Control
     [Export]
     public Label labelQuestStatus;
     [Export]
-    public Label labelQuestPoints;
-    [Export]
     public Label labelQuestObjective;
     [Export]
     public Button buttonStartQuest;
-    [Export]
-    public Button buttonAddPoint;
 
     private QuestResource _quest;
-    private QuestManager _questManager = QuestManager.GetInstance(); // (QuestManager)Engine.GetSingleton("QuestManager");
+    private QuestManager _questManager = QuestManager.GetInstance();
     private string _questStatusText;
-    private int _numPoints = 0;
+    private Array<QuestObjective> _activeObjectives = new Array<QuestObjective>();
+    private bool _questStartClicked = false;
 
     public override void _Ready()
     {
@@ -47,12 +44,6 @@ public partial class Game : Control
             missing = true;
         }
 
-        if (labelQuestPoints == null)
-        {
-            GD.PrintErr("Missing node Label QuestPoints");
-            missing = true;
-        }
-
         if (labelQuestObjective == null)
         {
             GD.PrintErr("Missing node Label QuestObjective");
@@ -65,12 +56,6 @@ public partial class Game : Control
             missing = true;
         }
 
-        if (buttonAddPoint == null)
-        {
-            GD.PrintErr("Missing node Button AddPoint");
-            missing = true;
-        }
-
         if (missing)
         {
             return;
@@ -80,37 +65,30 @@ public partial class Game : Control
 
         _questStatusText = "Quest not started";
 
-        labelQuestObjective.Text = "Objective: None";
-
         buttonStartQuest.Pressed += () =>
         {
             _questManager.StartQuest(_quest);
+            _questStartClicked = true;
         };
-
-        buttonAddPoint.Pressed += () =>
-        {
-            _numPoints++;
-            _dataManager.SetValue("target_num_points", _numPoints);
-        };
-
 
         _questManager.QuestStarted += (QuestResource qr) =>
         {
             GD.Print("Quest started");
-            _numPoints = 0;
             _questStatusText = $"{qr.Name} - {qr.Description}";
         };
 
         _questManager.QuestObjectiveAdded += (QuestResource qr, QuestObjective qo) =>
         {
             GD.Print("Quest objective added");
-            labelQuestObjective.Text = "Objective: " + qo.Description;
+            if (!_activeObjectives.Contains(qo))
+                _activeObjectives.Add(qo);
         };
 
         _questManager.QuestObjectiveCompleted += (QuestResource qr, QuestObjective qo) =>
         {
             GD.Print("Quest objective completed");
-            labelQuestObjective.Text = "Objective: None";
+            if (_activeObjectives.Contains(qo))
+                _activeObjectives.Remove(qo);
         };
 
         _questManager.QuestCompleted += (QuestResource qs) =>
@@ -127,21 +105,34 @@ public partial class Game : Control
             return;
         }
 
-        if (labelQuestStatus == null || labelQuestPoints == null || labelQuestObjective == null)
+        if (labelQuestStatus == null || labelQuestObjective == null)
         {
             return;
         }
 
-        if (buttonStartQuest == null || buttonAddPoint == null)
+        if (buttonStartQuest == null)
         {
             return;
         }
 
         labelQuestStatus.Text = _questStatusText;
-        labelQuestPoints.Text = $"{_numPoints} points";
 
-        buttonStartQuest.Disabled = _quest.Started;
-        buttonStartQuest.Text = _quest.Started ? "Quest in progress..." : "Start Quest";
+        buttonStartQuest.Disabled = _quest.Started || _questStartClicked;
+        buttonStartQuest.Text = _quest.Started ? "Quest in progress..." : (_questStartClicked ? "Quest done" : "Start Quest");
+
+        if (_activeObjectives.Count > 0)
+        {
+            string desc = "";
+            foreach (QuestObjective qo in _activeObjectives)
+            {
+                desc += qo.Description + " | ";
+            }
+            desc = desc.Substring(0, desc.Length - 3);
+            labelQuestObjective.Text = $"Objective: {desc}";
+        } else
+        {
+            labelQuestObjective.Text = "Objective: None";
+        }
 
         _quest.Update();
     }
