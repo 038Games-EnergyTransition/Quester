@@ -1,10 +1,13 @@
 using Godot;
+using System;
+using System.IO;
 
 [Tool]
 public partial class QuestEditor : Control
 {
+    public PackedScene EditorActionScene = GD.Load<PackedScene>("res://addons/quester/scenes/EditorAction.tscn");
 
-	private Button _newButton;
+    private Button _newButton;
 	private Button _openButton;
 	private Button _saveButton;
 	private Button _addNodeButton;
@@ -14,6 +17,7 @@ public partial class QuestEditor : Control
 	private PopupMenu _addNodeMenu;
 
 	private QuestEditorGraph _graph;
+	private VBoxContainer _actionlogContainer;
 
 	private string _saveFilePath;
 
@@ -43,7 +47,9 @@ public partial class QuestEditor : Control
 		_addNodeMenu.IndexPressed += (long idx) => _addNewNode((int)idx);
 
 		_graph = GetNode<QuestEditorGraph>("Content/QuestGraphEditor");
-	}
+        _actionlogContainer = GetNode<VBoxContainer>("ActionLog");
+
+    }
 
 	/// <summary>
 	/// Save the file to the given path
@@ -60,18 +66,22 @@ public partial class QuestEditor : Control
 		{
 			_saveFilePath = path;
 			EditorInterface.Singleton.GetResourceFilesystem().Scan();
-		}
+
+			_logAction($"Quest '{path}' saved!", "Save");
+        }
 	}
 
-	/// <summary>
-	/// Load the file from the given path
-	/// </summary>
-	/// <param name="path"></param>
-	private void loadFile(string path)
+    /// <summary>
+    /// Load the file from the given path
+    /// </summary>
+    /// <param name="path"></param>
+    private void loadFile(string path)
 	{
 		_graph.Load(path);
 		_saveFilePath = path;
-	}
+
+        _logAction($"Quest '{path}' loaded!", "Load");
+    }
 
 	/// <summary>
 	/// Apply changes to the graph
@@ -97,15 +107,17 @@ public partial class QuestEditor : Control
 		{
 			saveFile(_saveFilePath);
 		}
-	}
+    }
 
-	/// <summary>
-	/// Clear the graph
-	/// </summary>
-	private void _on_NewButton_pressed()
+    /// <summary>
+    /// Clear the graph
+    /// </summary>
+    private void _on_NewButton_pressed()
 	{
 		_graph.Clear();
-	}
+
+        _logAction($"New quest created!", "New");
+    }
 
 	/// <summary>
 	/// Open a file dialog to load a quest resource
@@ -186,5 +198,18 @@ public partial class QuestEditor : Control
 		}
 
 		_graph.AddNode(nodeScene, GetGlobalMousePosition());
-	}
+    }
+
+    /// <summary>
+    /// Create a log entry on top of the graph to notify the user of an action
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="icon"></param>
+    private void _logAction(string text, string icon)
+    {
+        EditorAction editorAction = (EditorAction)EditorActionScene.Instantiate();
+        editorAction.IconName = icon;
+        editorAction.ActionText = text;
+        _actionlogContainer.AddChild(editorAction);
+    }
 }

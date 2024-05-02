@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System;
 
 [Tool]
 public partial class StartNode : QuestGraphNode
@@ -16,6 +17,9 @@ public partial class StartNode : QuestGraphNode
     public override void _Ready()
     {
         base._Ready();
+
+        nameTextEdit.TextChanged += _onNameTextChanged;
+        descriptionTextEdit.TextChanged += _onDescriptionTextChanged;
     }
 
     protected override QuestNode _getModel()
@@ -37,5 +41,15 @@ public partial class StartNode : QuestGraphNode
         
         nameTextEdit.Text = QuestName;
         descriptionTextEdit.Text = QuestDescription;
+    }
+
+    private void _onNameTextChanged(string newText)
+    {
+        QuestName = newText;
+    }
+
+    private void _onDescriptionTextChanged()
+    {
+        QuestDescription = descriptionTextEdit.Text;
     }
 }
