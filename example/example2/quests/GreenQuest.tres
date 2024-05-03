@@ -8,183 +8,183 @@
 [ext_resource type="Script" path="res://addons/quester/scripts/model/QuestResource.cs" id="6_8l2sh"]
 [ext_resource type="Script" path="res://addons/quester/scripts/model/QuestAction.cs" id="6_itrr3"]
 
-[sub_resource type="Resource" id="Resource_w2s5p"]
+[sub_resource type="Resource" id="Resource_tf3ge"]
 script = ExtResource("1_lgyyt")
 Type = "variable"
 Key = "game_state"
 Id = "Pq_OP_knNv"
 Optional = false
-GraphEditorPosition = Vector2(360, 660)
+GraphEditorPosition = Vector2(200, 940)
 metadata/Value = 0
 
-[sub_resource type="Resource" id="Resource_m7suj"]
+[sub_resource type="Resource" id="Resource_jjohg"]
 script = ExtResource("2_jj2pc")
 Description = "Why are you here?"
 Id = "oT60dLn6Sg"
 Optional = true
-GraphEditorPosition = Vector2(880, 640)
+GraphEditorPosition = Vector2(840, 620)
 
-[sub_resource type="Resource" id="Resource_8be84"]
+[sub_resource type="Resource" id="Resource_eluo8"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_w2s5p")
-To = SubResource("Resource_m7suj")
+From = SubResource("Resource_tf3ge")
+To = SubResource("Resource_jjohg")
 edgeType = 1
 
-[sub_resource type="Resource" id="Resource_av7yd"]
+[sub_resource type="Resource" id="Resource_eqwtv"]
 script = ExtResource("1_qbua5")
 Name = "Green Quest"
 Description = ""
 Id = "5C6hziiKwx"
 Optional = false
-GraphEditorPosition = Vector2(440, 260)
+GraphEditorPosition = Vector2(300, 540)
 
-[sub_resource type="Resource" id="Resource_egfgf"]
+[sub_resource type="Resource" id="Resource_j0f5u"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_av7yd")
-To = SubResource("Resource_m7suj")
+From = SubResource("Resource_eqwtv")
+To = SubResource("Resource_jjohg")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_vi4ke"]
+[sub_resource type="Resource" id="Resource_ics3e"]
 script = ExtResource("5_2cpyt")
 Id = "8HOkdF91kD"
 Optional = false
-GraphEditorPosition = Vector2(1420, 260)
+GraphEditorPosition = Vector2(1520, 680)
 
-[sub_resource type="Resource" id="Resource_gngit"]
+[sub_resource type="Resource" id="Resource_rt6lh"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_m7suj")
-To = SubResource("Resource_vi4ke")
+From = SubResource("Resource_jjohg")
+To = SubResource("Resource_ics3e")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_ht574"]
+[sub_resource type="Resource" id="Resource_r5vl4"]
 script = ExtResource("2_jj2pc")
 Description = ""
 Id = "0yhi0tqBrV"
 Optional = true
-GraphEditorPosition = Vector2(880, 1200)
+GraphEditorPosition = Vector2(840, 1220)
 
-[sub_resource type="Resource" id="Resource_xat0o"]
+[sub_resource type="Resource" id="Resource_sjon8"]
 script = ExtResource("6_itrr3")
 Type = "variable"
 Key = "green_speak"
 Id = "xe-7Ghlf23"
 Optional = false
-GraphEditorPosition = Vector2(1540, 1400)
+GraphEditorPosition = Vector2(1520, 1700)
 metadata/Value = "Oh red send you? Tell them I said hi!"
 
-[sub_resource type="Resource" id="Resource_mu6cc"]
+[sub_resource type="Resource" id="Resource_hlv6a"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_ht574")
-To = SubResource("Resource_xat0o")
+From = SubResource("Resource_r5vl4")
+To = SubResource("Resource_sjon8")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_8v7ha"]
+[sub_resource type="Resource" id="Resource_kxrjc"]
 script = ExtResource("6_itrr3")
 Type = "variable"
 Key = "game_state"
 Id = "pFDFDPf379"
 Optional = false
-GraphEditorPosition = Vector2(1540, 1080)
+GraphEditorPosition = Vector2(1520, 2100)
 metadata/Value = 2
 
-[sub_resource type="Resource" id="Resource_sj4if"]
+[sub_resource type="Resource" id="Resource_naj0x"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_ht574")
-To = SubResource("Resource_8v7ha")
+From = SubResource("Resource_r5vl4")
+To = SubResource("Resource_kxrjc")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_yxjbt"]
+[sub_resource type="Resource" id="Resource_568sa"]
 script = ExtResource("6_itrr3")
 Type = "variable"
 Key = "green_speak"
 Id = "aJl8lUYCO1"
 Optional = false
-GraphEditorPosition = Vector2(1540, 660)
+GraphEditorPosition = Vector2(1520, 840)
 metadata/Value = "Who are you?"
 
-[sub_resource type="Resource" id="Resource_v7kr6"]
+[sub_resource type="Resource" id="Resource_i4ltn"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_m7suj")
-To = SubResource("Resource_yxjbt")
+From = SubResource("Resource_jjohg")
+To = SubResource("Resource_568sa")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_kop4e"]
+[sub_resource type="Resource" id="Resource_obetl"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_ht574")
-To = SubResource("Resource_vi4ke")
+From = SubResource("Resource_r5vl4")
+To = SubResource("Resource_ics3e")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_mav4n"]
+[sub_resource type="Resource" id="Resource_tuyft"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_av7yd")
-To = SubResource("Resource_ht574")
+From = SubResource("Resource_eqwtv")
+To = SubResource("Resource_r5vl4")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_cihga"]
+[sub_resource type="Resource" id="Resource_qoawp"]
 script = ExtResource("1_lgyyt")
 Type = "variable"
 Key = "game_state"
 Id = "Rovi0FToiY"
 Optional = false
-GraphEditorPosition = Vector2(360, 1040)
+GraphEditorPosition = Vector2(200, 1540)
 metadata/Value = 1
 
-[sub_resource type="Resource" id="Resource_0vkap"]
+[sub_resource type="Resource" id="Resource_douyx"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_cihga")
-To = SubResource("Resource_ht574")
+From = SubResource("Resource_qoawp")
+To = SubResource("Resource_r5vl4")
 edgeType = 1
 
-[sub_resource type="Resource" id="Resource_jjqqm"]
+[sub_resource type="Resource" id="Resource_ndl3m"]
 script = ExtResource("2_jj2pc")
 Description = "Leave me alone!"
 Id = "U1WGTf5bJb"
 Optional = true
-GraphEditorPosition = Vector2(880, 1760)
+GraphEditorPosition = Vector2(840, 1820)
 
-[sub_resource type="Resource" id="Resource_uhcgw"]
+[sub_resource type="Resource" id="Resource_4rfnk"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_av7yd")
-To = SubResource("Resource_jjqqm")
+From = SubResource("Resource_eqwtv")
+To = SubResource("Resource_ndl3m")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_wu6uu"]
+[sub_resource type="Resource" id="Resource_hsx41"]
 script = ExtResource("1_lgyyt")
 Type = "variable"
 Key = "game_state"
 Id = "3dq9VwgwnX"
 Optional = false
-GraphEditorPosition = Vector2(360, 1720)
+GraphEditorPosition = Vector2(200, 2140)
 metadata/Value = 3
 
-[sub_resource type="Resource" id="Resource_dn8ua"]
+[sub_resource type="Resource" id="Resource_78r6q"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_wu6uu")
-To = SubResource("Resource_jjqqm")
+From = SubResource("Resource_hsx41")
+To = SubResource("Resource_ndl3m")
 edgeType = 1
 
-[sub_resource type="Resource" id="Resource_cknm3"]
+[sub_resource type="Resource" id="Resource_v8v1x"]
 script = ExtResource("6_itrr3")
 Type = "variable"
 Key = "green_speak"
 Id = "pL3ke82FFz"
 Optional = false
-GraphEditorPosition = Vector2(1540, 1820)
+GraphEditorPosition = Vector2(1520, 1300)
 metadata/Value = "I have nothing for you."
 
-[sub_resource type="Resource" id="Resource_uisg3"]
+[sub_resource type="Resource" id="Resource_1gmxs"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_jjqqm")
-To = SubResource("Resource_cknm3")
+From = SubResource("Resource_ndl3m")
+To = SubResource("Resource_v8v1x")
 edgeType = 0
 
-[sub_resource type="Resource" id="Resource_hqhrp"]
+[sub_resource type="Resource" id="Resource_o0q65"]
 script = ExtResource("3_277wn")
-From = SubResource("Resource_jjqqm")
-To = SubResource("Resource_vi4ke")
+From = SubResource("Resource_ndl3m")
+To = SubResource("Resource_ics3e")
 edgeType = 0
 
 [resource]
 script = ExtResource("6_8l2sh")
-Nodes = [SubResource("Resource_vi4ke"), SubResource("Resource_w2s5p"), SubResource("Resource_av7yd"), SubResource("Resource_ht574"), SubResource("Resource_cihga"), SubResource("Resource_8v7ha"), SubResource("Resource_yxjbt"), SubResource("Resource_m7suj"), SubResource("Resource_cknm3"), SubResource("Resource_jjqqm"), SubResource("Resource_wu6uu"), SubResource("Resource_xat0o")]
-Edges = [SubResource("Resource_8be84"), SubResource("Resource_egfgf"), SubResource("Resource_gngit"), SubResource("Resource_mu6cc"), SubResource("Resource_sj4if"), SubResource("Resource_v7kr6"), SubResource("Resource_kop4e"), SubResource("Resource_mav4n"), SubResource("Resource_0vkap"), SubResource("Resource_uhcgw"), SubResource("Resource_dn8ua"), SubResource("Resource_uisg3"), SubResource("Resource_hqhrp")]
+Nodes = [SubResource("Resource_tf3ge"), SubResource("Resource_r5vl4"), SubResource("Resource_qoawp"), SubResource("Resource_kxrjc"), SubResource("Resource_568sa"), SubResource("Resource_jjohg"), SubResource("Resource_ndl3m"), SubResource("Resource_hsx41"), SubResource("Resource_sjon8"), SubResource("Resource_eqwtv"), SubResource("Resource_v8v1x"), SubResource("Resource_ics3e")]
+Edges = [SubResource("Resource_eluo8"), SubResource("Resource_j0f5u"), SubResource("Resource_rt6lh"), SubResource("Resource_hlv6a"), SubResource("Resource_naj0x"), SubResource("Resource_i4ltn"), SubResource("Resource_obetl"), SubResource("Resource_tuyft"), SubResource("Resource_douyx"), SubResource("Resource_4rfnk"), SubResource("Resource_78r6q"), SubResource("Resource_1gmxs"), SubResource("Resource_o0q65")]
