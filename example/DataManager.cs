@@ -17,12 +17,30 @@ public partial class DataManager : Node
         {
             if (type == "variable")
             {
-                if (GetValue(key).Equals(value))
+                if (CompareValue(key, value))
                 {
                     requester.Completed = true;
                 }
             }
         };
+
+        QuestManager.GetInstance().ActionQueryRequested += (string type, string key, Variant value, QuestAction requester) =>
+        {
+            if (type == "variable")
+            {
+                SetValue(key, value);
+            }
+        };
+    }
+
+    private bool CompareValue(string key, Variant value)
+    {
+        if (value.VariantType == Variant.Type.Float)
+        {
+            return (float)value % 1 == 0 ? GetValue(key).Equals((int)value) : GetValue(key).Equals(value);
+        }
+
+        return GetValue(key).Equals(value);
     }
 
     public void SetValue(string key, Variant value)
@@ -35,6 +53,7 @@ public partial class DataManager : Node
         {
             _data.Add(key, value);
         }
+
         EmitSignal(SignalName.DataChanged, key, value);
     }
 

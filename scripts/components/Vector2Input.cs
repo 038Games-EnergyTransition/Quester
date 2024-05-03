@@ -33,4 +33,9 @@ public partial class Vector2Input : HBoxContainer
         xValue.Value = value.X;
         yValue.Value = value.Y;
     }
+
+    public Vector2 GetValue()
+    {
+        return new Vector2((float)xValue.Value, (float)yValue.Value);
+    }
 }

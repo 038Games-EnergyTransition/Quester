@@ -32,7 +32,7 @@ public partial class VariantInput : HBoxContainer
         typeSelect.SetItemIcon(0, GetThemeIcon("bool", "EditorIcons"));
         typeSelect.SetItemIcon(1, GetThemeIcon("String", "EditorIcons"));
         typeSelect.SetItemIcon(2, GetThemeIcon("Vector2", "EditorIcons"));
-        typeSelect.SetItemIcon(3, GetThemeIcon("Vector3", "EditorIcons"));        
+        typeSelect.SetItemIcon(3, GetThemeIcon("Vector3", "EditorIcons"));
         typeSelect.SetItemIcon(4, GetThemeIcon("int", "EditorIcons"));
         typeSelect.SetItemIcon(5, GetThemeIcon("float", "EditorIcons"));
 
@@ -75,7 +75,7 @@ public partial class VariantInput : HBoxContainer
                 index = 4;
                 break;
             case Variant.Type.Float:
-                index = 5;
+                index = (float)value % 1 == 0 ? 4 : 5;
                 break;
         }
 
@@ -83,7 +83,11 @@ public partial class VariantInput : HBoxContainer
         SelectType(index);
 
         Control input = inputsContainer.GetChild(index) as Control;
-        if (input is LineEdit)
+        if (input is CheckBox)
+        {
+            (input as CheckBox).ButtonPressed = (bool)value;
+        }
+        else if (input is LineEdit)
         {
             (input as LineEdit).Text = value.ToString();
         }
@@ -97,12 +101,47 @@ public partial class VariantInput : HBoxContainer
         }
         else if (input is SpinBox)
         {
-            (input as SpinBox).Value = (float)value;
+            (input as SpinBox).Value = ((double)value) % 1 == 0 ? (int)value : (float)value;
         }
     }
 
-    private void _onTypeSelected(long index) {
+    public Variant GetValue()
+    {
+        Control input = inputsContainer.GetChild(typeSelect.Selected) as Control;
+        if (input is CheckBox)
+        {
+            return (input as CheckBox).ButtonPressed;
+        }
+        else if (input is LineEdit)
+        {
+            return (input as LineEdit).Text;
+        }
+        else if (input is Vector2Input)
+        {
+            return (input as Vector2Input).GetValue();
+        }
+        else if (input is Vector3Input)
+        {
+            return (input as Vector3Input).GetValue();
+        }
+        else if (input is SpinBox)
+        {
+            return (float)(input as SpinBox).Value;
+        }
+        
+        return new Variant();
+    }
+
+    private void _onTypeSelected(long index)
+    {
         SelectType((int)index);
+
+        Variant value = GetValue();
+        if (value.VariantType == Variant.Type.Float && (float)value % 1 == 0)
+        {
+            value = (int)value;
+        }
+        _emitValueChanged(value);
     }
 
     private void _onValueChanged(bool value)
@@ -137,7 +176,8 @@ public partial class VariantInput : HBoxContainer
         }
     }
 
-    private void _emitValueChanged(Variant value) {
+    private void _emitValueChanged(Variant value)
+    {
         EmitSignal(SignalName.ValueChanged, value);
     }
 }

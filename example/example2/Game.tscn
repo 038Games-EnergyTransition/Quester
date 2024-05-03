@@ -1,0 +1,134 @@
+[gd_scene load_steps=15 format=3 uid="uid://fb7sn57675en"]
+
+[ext_resource type="Texture2D" uid="uid://cqbna2psgkdl4" path="res://addons/quester/example/example2/assets/background.png" id="1_c5dto"]
+[ext_resource type="Script" path="res://addons/quester/example/example2/Example2Game.cs" id="1_q7td6"]
+[ext_resource type="Script" path="res://addons/quester/example/DataManager.cs" id="2_6w7xc"]
+[ext_resource type="Script" path="res://addons/quester/example/example2/scripts/Example2Player.cs" id="2_l0gui"]
+[ext_resource type="Texture2D" uid="uid://dokru7kaox1ln" path="res://addons/quester/example/example2/assets/blue.png" id="3_71lcq"]
+[ext_resource type="Script" path="res://addons/quester/example/example2/scripts/Example2Entity.cs" id="4_p0td2"]
+[ext_resource type="Texture2D" uid="uid://b32y7j8y6hhfv" path="res://addons/quester/example/example2/assets/red.png" id="5_jpbj8"]
+[ext_resource type="Texture2D" uid="uid://by47wxlbbd6i2" path="res://addons/quester/example/example2/assets/green.png" id="6_dn8tb"]
+[ext_resource type="Resource" uid="uid://da1j0533tdnk" path="res://addons/quester/example/example2/quests/RedQuest.tres" id="7_beprc"]
+[ext_resource type="Resource" uid="uid://d0ktas3dweyvn" path="res://addons/quester/example/example2/quests/GreenQuest.tres" id="9_pmwmy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn6gk"]
+size = Vector2(1280, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j60ow"]
+size = Vector2(128, 464)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r306j"]
+radius = 40.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ng1m5"]
+size = Vector2(64, 64)
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_dataManager")]
+script = ExtResource("1_q7td6")
+_dataManager = NodePath("DataManager")
+
+[node name="DataManager" type="Node" parent="."]
+script = ExtResource("2_6w7xc")
+
+[node name="Background" type="StaticBody2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Background"]
+texture = ExtResource("1_c5dto")
+centered = false
+
+[node name="CollisionTop" type="CollisionShape2D" parent="Background"]
+position = Vector2(640, 64)
+shape = SubResource("RectangleShape2D_hn6gk")
+
+[node name="CollisionBottom" type="CollisionShape2D" parent="Background"]
+position = Vector2(640, 656)
+shape = SubResource("RectangleShape2D_hn6gk")
+
+[node name="CollisionLeft" type="CollisionShape2D" parent="Background"]
+position = Vector2(64, 360)
+shape = SubResource("RectangleShape2D_j60ow")
+
+[node name="CollisionRight" type="CollisionShape2D" parent="Background"]
+position = Vector2(1216, 360)
+shape = SubResource("RectangleShape2D_j60ow")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(640, 496)
+script = ExtResource("2_l0gui")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("3_71lcq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_r306j")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(1.2, 1.2)
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 720
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="EntityRed" type="StaticBody2D" parent="." node_paths=PackedStringArray("_dataManager", "QuestTrigger", "QuestLabel")]
+position = Vector2(376, 200)
+script = ExtResource("4_p0td2")
+Quest = ExtResource("7_beprc")
+_dataManager = NodePath("../DataManager")
+BaseKey = "red"
+QuestTrigger = NodePath("Area2D")
+QuestLabel = NodePath("Label")
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityRed"]
+texture = ExtResource("5_jpbj8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityRed"]
+shape = SubResource("CircleShape2D_r306j")
+
+[node name="Area2D" type="Area2D" parent="EntityRed"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityRed/Area2D"]
+position = Vector2(0, 80)
+shape = SubResource("RectangleShape2D_ng1m5")
+
+[node name="Label" type="Label" parent="EntityRed"]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = -48.0
+offset_top = 120.0
+offset_right = 52.0
+offset_bottom = 143.0
+text = "{{PLACEHOLDER}}"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="EntityGreen" type="StaticBody2D" parent="." node_paths=PackedStringArray("_dataManager", "QuestTrigger", "QuestLabel")]
+position = Vector2(856, 200)
+script = ExtResource("4_p0td2")
+Quest = ExtResource("9_pmwmy")
+_dataManager = NodePath("../DataManager")
+BaseKey = "green"
+QuestTrigger = NodePath("Area2D")
+QuestLabel = NodePath("Label")
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityGreen"]
+texture = ExtResource("6_dn8tb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityGreen"]
+shape = SubResource("CircleShape2D_r306j")
+
+[node name="Area2D" type="Area2D" parent="EntityGreen"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityGreen/Area2D"]
+position = Vector2(0, 80)
+shape = SubResource("RectangleShape2D_ng1m5")
+
+[node name="Label" type="Label" parent="EntityGreen"]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = -48.0
+offset_top = 120.0
+offset_right = 52.0
+offset_bottom = 143.0
+text = "{{PLACEHOLDER}}"
+horizontal_alignment = 1
+autowrap_mode = 2

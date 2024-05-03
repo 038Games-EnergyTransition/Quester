@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 
 [Tool]
-public partial class QuestCondition : QuestNode
+public partial class QuestAction : QuestNode
 {
 
     public enum ValueType
@@ -34,7 +34,8 @@ public partial class QuestCondition : QuestNode
         if (!Completed)
         {
             // DONE: Emit condition query requested signal
-            QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.ConditionQueryRequested, Type, Key, Value, this);
+            QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.ActionQueryRequested, Type, Key, Value, this);
+            Completed = true;
         }
     }
 }

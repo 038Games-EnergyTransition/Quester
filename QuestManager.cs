@@ -9,6 +9,8 @@ public partial class QuestManager : Node
     [Signal]
     public delegate void ConditionQueryRequestedEventHandler(string type, string key, Variant value, QuestCondition requester);
     [Signal]
+    public delegate void ActionQueryRequestedEventHandler(string type, string key, Variant value, QuestAction requester);
+    [Signal]
     public delegate void QuestStartedEventHandler(QuestResource quest);
     [Signal]
     public delegate void QuestObjectiveAddedEventHandler(QuestResource quest, QuestObjective objective);
@@ -55,6 +57,12 @@ public partial class QuestManager : Node
             quest.Update();
         }
     }
+
+    public void ResetQuest(QuestResource quest)
+    {
+        quest.Reset();
+    }
+
     public void Clear()
     {
         _quests.Clear();

@@ -93,6 +93,45 @@ public partial class QuestNode : Resource
         {
             (node as QuestCondition).Update();
         }
+
+        if (node is QuestAction)
+        {
+            (node as QuestAction).Update();
+        }
+    }
+
+    public void Reset()
+    {
+        Active = false;
+        Completed = false;
+    }
+
+    public static void Reset(QuestNode node)
+    {
+        if (node is QuestStart)
+        {
+            (node as QuestStart).Reset();
+        }
+
+        if (node is QuestObjective)
+        {
+            (node as QuestObjective).Reset();
+        }
+
+        if (node is QuestEnd)
+        {
+            (node as QuestEnd).Reset();
+        }
+
+        if (node is QuestCondition)
+        {
+            (node as QuestCondition).Reset();
+        }
+
+        if (node is QuestAction)
+        {
+            (node as QuestAction).Reset();
+        }
     }
 
     public void SetGraph(QuestResource _graph)

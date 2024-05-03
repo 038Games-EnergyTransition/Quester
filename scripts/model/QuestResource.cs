@@ -138,7 +138,7 @@ public partial class QuestResource : Resource
     public void CompleteQuest()
     {
         Completed = true;
-        _startNode.Active = false;
+        // _startNode.Active = false;
         // DONE: Emit signal to notify that the quest has been completed.
         QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestCompleted, this);
     }
@@ -207,6 +207,15 @@ public partial class QuestResource : Resource
         {
             // DONE: Emit signal to notify that a new objective has been added.
             QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestObjectiveAdded, this, objective);
+        }
+    }
+
+    internal void Reset()
+    {
+        Completed = false;
+        foreach (QuestNode node in Nodes)
+        {
+            QuestNode.Reset(node);
         }
     }
 }
