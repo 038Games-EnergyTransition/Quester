@@ -49,6 +49,8 @@ public partial class QuestEditor : Control
 		_graph = GetNode<QuestEditorGraph>("Content/QuestGraphEditor");
         _actionlogContainer = GetNode<VBoxContainer>("ActionLog");
 
+		_graph.PopupRequest += (Vector2 position) => ShowAddNodeMenu(GetGlobalMousePosition());
+
     }
 
 	/// <summary>
