@@ -117,7 +117,7 @@ public partial class QuestEditor : Control
     private void _on_NewButton_pressed()
 	{
 		_graph.Clear();
-
+		_saveFilePath = string.Empty;
         _logAction($"New quest created!", "New");
     }
 

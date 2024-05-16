@@ -13,7 +13,8 @@ public partial class QuestResource : Resource
     private bool _wasInitialized = false;
 
     private QuestStart _intStartNode;
-    private QuestStart _startNode {
+    private QuestStart _startNode
+    {
         get { _initialize(); return _intStartNode; }
         set { _intStartNode = value; }
     }
@@ -141,6 +142,7 @@ public partial class QuestResource : Resource
         // _startNode.Active = false;
         // DONE: Emit signal to notify that the quest has been completed.
         QuestManager.Instance.EmitSignal(QuestManager.SignalName.QuestCompleted, this);
+        QuestManager.Instance.RemoveQuest(this);
     }
 
     public Dictionary Serialize()

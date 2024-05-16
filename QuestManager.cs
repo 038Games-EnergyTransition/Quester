@@ -67,10 +67,15 @@ public partial class QuestManager : Node
 
     public void UpdateQuests()
     {
-        foreach (QuestResource quest in _quests)
+        for (int i = 0; i < _quests.Count; i++)
         {
-            quest.Update();
+            _quests[i].Update();
         }
+
+    }
+    public void RemoveQuest(QuestResource quest)
+    {
+        _quests.Remove(quest);
     }
 
     public void ResetQuest(QuestResource quest)
