@@ -18,7 +18,7 @@ public partial class Game : Control
     public Button buttonStartQuest;
 
     private QuestResource _quest;
-    private QuestManager _questManager = QuestManager.GetInstance();
+    private QuestManager _questManager = QuestManager.Instance;
     private string _questStatusText;
     private Array<QuestObjective> _activeObjectives = new Array<QuestObjective>();
     private bool _questStartClicked = false;

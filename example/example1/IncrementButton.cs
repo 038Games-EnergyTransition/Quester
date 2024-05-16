@@ -10,7 +10,7 @@ public partial class IncrementButton : Button
     public DataManager _dataManager;
 
 
-    private QuestManager _questManager = QuestManager.GetInstance();
+    private QuestManager _questManager = QuestManager.Instance;
 
     public override void _Ready()
     {

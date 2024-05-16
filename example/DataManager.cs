@@ -13,7 +13,7 @@ public partial class DataManager : Node
 
     public override void _Ready()
     {
-        QuestManager.GetInstance().ConditionQueryRequested += (string type, string key, Variant value, QuestCondition requester) =>
+        QuestManager.Instance.ConditionQueryRequested += (string type, string key, Variant value, QuestCondition requester) =>
         {
             if (type == "variable")
             {
@@ -24,7 +24,7 @@ public partial class DataManager : Node
             }
         };
 
-        QuestManager.GetInstance().ActionQueryRequested += (string type, string key, Variant value, QuestAction requester) =>
+        QuestManager.Instance.ActionQueryRequested += (string type, string key, Variant value, QuestAction requester) =>
         {
             if (type == "variable")
             {

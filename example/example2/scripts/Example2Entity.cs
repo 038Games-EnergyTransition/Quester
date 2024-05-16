@@ -18,7 +18,7 @@ public partial class Example2Entity : StaticBody2D
 
 	private QuestResource _quest;
 
-	private QuestManager _questManager = QuestManager.GetInstance();
+	private QuestManager _questManager = QuestManager.Instance;
 
 	public override void _Ready()
 	{

@@ -34,7 +34,7 @@ public partial class QuestAction : QuestNode
         if (!Completed)
         {
             // DONE: Emit condition query requested signal
-            QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.ActionQueryRequested, Type, Key, Value, this);
+            QuestManager.Instance.EmitSignal(QuestManager.SignalName.ActionQueryRequested, Type, Key, Value, this);
             Completed = true;
         }
     }

@@ -24,6 +24,21 @@ public partial class QuestManager : Node
     private Timer _questUpdateTimer;
 
     private static QuestManager _instance;
+    public static QuestManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new QuestManager();
+            }
+            return _instance;
+        }
+        private set
+        {
+            _instance = value;
+        }
+    }
 
     public override void _Ready()
     {
@@ -109,14 +124,5 @@ public partial class QuestManager : Node
         {
             _questUpdateTimer.Paused = !value;
         }
-    }
-
-    public static QuestManager GetInstance()
-    {
-        if (_instance == null)
-        {
-            _instance = new QuestManager();
-        }
-        return _instance;
     }
 }

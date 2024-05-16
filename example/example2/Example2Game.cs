@@ -7,7 +7,7 @@ public partial class Example2Game : Node2D
     [Export]
     public DataManager _dataManager;
 	
-	private QuestManager _questManager = QuestManager.GetInstance();
+	private QuestManager _questManager = QuestManager.Instance;
 
 	public override void _Ready()
 	{

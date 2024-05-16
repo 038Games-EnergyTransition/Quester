@@ -53,7 +53,7 @@ public partial class QuestResource : Resource
             _startNode.Active = true;
             _startNode.Completed = true;
             // DONE: Emit signal to notify that the quest has started.
-            QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestStarted, this);
+            QuestManager.Instance.EmitSignal(QuestManager.SignalName.QuestStarted, this);
             //EmitSignal(QuestManager.SignalName.QuestStarted, this);
             NotifyActiveObjectives();
         }
@@ -125,13 +125,13 @@ public partial class QuestResource : Resource
     public void RequestQuery(string type, string key, Variant value, QuestCondition requester)
     {
         // DONE: Emit signal to request a query.
-        QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.ConditionQueryRequested, type, key, value, requester);
+        QuestManager.Instance.EmitSignal(QuestManager.SignalName.ConditionQueryRequested, type, key, value, requester);
     }
 
     public void CompleteObjective(QuestObjective objective)
     {
         // DONE: Emit signal to notify that an objective has been completed.
-        QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestObjectiveCompleted, this, objective);
+        QuestManager.Instance.EmitSignal(QuestManager.SignalName.QuestObjectiveCompleted, this, objective);
         NotifyActiveObjectives();
     }
 
@@ -140,7 +140,7 @@ public partial class QuestResource : Resource
         Completed = true;
         // _startNode.Active = false;
         // DONE: Emit signal to notify that the quest has been completed.
-        QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestCompleted, this);
+        QuestManager.Instance.EmitSignal(QuestManager.SignalName.QuestCompleted, this);
     }
 
     public Dictionary Serialize()
@@ -206,7 +206,7 @@ public partial class QuestResource : Resource
         foreach (QuestObjective objective in GetActiveObjectives())
         {
             // DONE: Emit signal to notify that a new objective has been added.
-            QuestManager.GetInstance().EmitSignal(QuestManager.SignalName.QuestObjectiveAdded, this, objective);
+            QuestManager.Instance.EmitSignal(QuestManager.SignalName.QuestObjectiveAdded, this, objective);
         }
     }
 
