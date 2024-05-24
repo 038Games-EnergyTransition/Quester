@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 using Godot.Collections;
 
@@ -64,3 +65,4 @@ public partial class ConditionNode : QuestGraphNode
         Value = value;
     }
 }
+#endif

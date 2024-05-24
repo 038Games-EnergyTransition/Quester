@@ -1,3 +1,4 @@
+#if TOOLS
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -76,3 +77,4 @@ public partial class MetadataEditor : VBoxContainer
         _AddItem("", false);
     }
 }
+#endif

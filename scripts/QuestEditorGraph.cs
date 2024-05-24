@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 using Godot.Collections;
 
@@ -321,3 +322,4 @@ public partial class QuestEditorGraph : GraphEdit
 		_selectedNodes.Clear();
 	}
 }
+#endif

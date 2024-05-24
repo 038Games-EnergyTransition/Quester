@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 using Godot.Collections;
 
@@ -28,3 +29,4 @@ public abstract partial class QuestGraphNode : GraphNode
     protected abstract void _getModelProperties(QuestNode node);
 
 }
+#endif
