@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 
 [Tool]
@@ -80,3 +81,4 @@ public partial class MetadataItem : VBoxContainer
         _metaEditor.SetValue(this);
     }
 }
+#endif

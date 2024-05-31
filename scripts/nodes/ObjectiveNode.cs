@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 using Godot.Collections;
 
@@ -63,3 +64,4 @@ public partial class ObjectiveNode : QuestGraphNode
         Optional = toggled;
     }
 }
+#endif

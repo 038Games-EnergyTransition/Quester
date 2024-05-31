@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 using Godot.Collections;
 
@@ -26,3 +27,4 @@ public partial class EndNode : QuestGraphNode
     {
     }
 }
+#endif
