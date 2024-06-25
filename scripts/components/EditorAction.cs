@@ -1,13 +1,13 @@
 #if TOOLS
-using Godot;
 using System;
+using Godot;
 
 [Tool]
 public partial class EditorAction : HBoxContainer
 {
-
     [Export]
     public string IconName { get; set; }
+
     [Export]
     public string ActionText { get; set; }
 
@@ -73,16 +73,21 @@ public partial class EditorAction : HBoxContainer
             if (IconName == null || IconName.Length == 0)
             {
                 (FindChild("Icon") as TextureRect).Visible = false;
-
-            } else
+            }
+            else
             {
-                (FindChild("Icon") as TextureRect).Texture = EditorInterface.Singleton.GetEditorTheme().GetIcon(IconName, "EditorIcons");
-
+                (FindChild("Icon") as TextureRect).Texture = EditorInterface
+                    .Singleton.GetEditorTheme()
+                    .GetIcon(IconName, "EditorIcons");
             }
             (FindChild("Label") as Label).Text = ActionText;
         }
     }
 
+    /// <summary>
+    /// Sets the alpha of the action.
+    /// </summary>
+    /// <param name="alpha"></param>
     private void setAlpha(float alpha)
     {
         Color currentColor = Modulate;

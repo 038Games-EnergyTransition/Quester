@@ -2,14 +2,21 @@
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// A template node that represents a node in a quest graph.
+/// </summary>
 [Tool]
 public abstract partial class QuestGraphNode : GraphNode
 {
-
     public string Id;
     public bool HasLoadedPosition;
 
-    public QuestNode GetModel() {
+    /// <summary>
+    /// Returns a new instance of the model.
+    /// </summary>
+    /// <returns></returns>
+    public QuestNode GetModel()
+    {
         QuestNode node = _getModel();
         node.Id = Id;
         node.GraphEditorPosition = PositionOffset;
@@ -17,7 +24,12 @@ public abstract partial class QuestGraphNode : GraphNode
         return node;
     }
 
-    public void LoadModel(QuestNode node) {
+    /// <summary>
+    /// loads a model into a quest graph node.
+    /// </summary>
+    /// <param name="node"></param>
+    public void LoadModel(QuestNode node)
+    {
         Id = node.Id;
         PositionOffset = node.GraphEditorPosition;
         HasLoadedPosition = true;
@@ -27,6 +39,7 @@ public abstract partial class QuestGraphNode : GraphNode
     protected abstract QuestNode _getModel();
     protected abstract void _setModelProperties(QuestNode node);
     protected abstract void _getModelProperties(QuestNode node);
+}
 
 }
 #endif

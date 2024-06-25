@@ -11,6 +11,7 @@ public partial class Vector2Input : HBoxContainer
 
     [Export]
     public SpinBox xValue;
+
     [Export]
     public SpinBox yValue;
 
@@ -28,12 +29,20 @@ public partial class Vector2Input : HBoxContainer
         };
     }
 
+    /// <summary>
+    /// Sets the value of the input.
+    /// </summary>
+    /// <param name="value"></param>
     public void SetValue(Vector2 value)
     {
         xValue.Value = value.X;
         yValue.Value = value.Y;
     }
 
+    /// <summary>
+    /// Gets the value of the input.
+    /// </summary>
+    /// <returns></returns>
     public Vector2 GetValue()
     {
         return new Vector2((float)xValue.Value, (float)yValue.Value);

@@ -1,9 +1,11 @@
 using Godot;
 
+/// <summary>
+/// A debouncer class used for debouncing a callable function.
+/// </summary>
 [Tool]
 public partial class Debouncer : RefCounted
 {
-
     const double DEFAULT_DEBOUNCE_TIME = 0.25; // Seconds
 
     private SceneTree _tree;
@@ -16,6 +18,10 @@ public partial class Debouncer : RefCounted
         _debounceTime = time;
     }
 
+    /// <summary>
+    /// Debounces a callable function.
+    /// </summary>
+    /// <param name="callable"></param>
     public void Debounce(Callable callable)
     {
         if (_timer != null)
@@ -27,6 +33,9 @@ public partial class Debouncer : RefCounted
         _timer.Connect("timeout", callable); // TODO: One-shot signal
     }
 
+    /// <summary>
+    /// Disconnects the timer.
+    /// </summary>
     public void DisconnectTimer()
     {
         foreach (var connection in _timer.GetSignalConnectionList("timeout"))

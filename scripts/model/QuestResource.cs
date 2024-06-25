@@ -1,12 +1,15 @@
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// A resource where all information about a quest is stored.
+/// </summary>
 [Tool]
 public partial class QuestResource : Resource
 {
-
     [Export]
     public Array<QuestNode> Nodes { get; set; } = new Array<QuestNode>();
+
     [Export]
     public Array<QuestEdge> Edges { get; set; } = new Array<QuestEdge>();
 
@@ -15,13 +18,26 @@ public partial class QuestResource : Resource
     private QuestStart _intStartNode;
     private QuestStart _startNode
     {
-        get { _initialize(); return _intStartNode; }
+        get
+        {
+            _initialize();
+            return _intStartNode;
+        }
         set { _intStartNode = value; }
     }
 
-    public string Name { get { return _startNode.Name; } }
-    public string Description { get { return _startNode.Description; } }
-    public bool Started { get { return _startNode.Active; } }
+    public string Name
+    {
+        get { return _startNode.Name; }
+    }
+    public string Description
+    {
+        get { return _startNode.Description; }
+    }
+    public bool Started
+    {
+        get { return _startNode.Active; }
+    }
     public bool Completed;
     public bool IsInstance;
 
@@ -41,6 +57,9 @@ public partial class QuestResource : Resource
         return instance;
     }
 
+    /// <summary>
+    /// Starts the quest and does the necesery check to see if it isnt already complete.
+    /// </summary>
     public void Start()
     {
         if (!IsInstance)
@@ -60,6 +79,9 @@ public partial class QuestResource : Resource
         }
     }
 
+    /// <summary>
+    /// Updates the quest by calling the update method of the start node.
+    /// </summary>
     public void Update()
     {
         if (!Started)
@@ -79,6 +101,9 @@ public partial class QuestResource : Resource
         }
     }
 
+    /// <summary>
+    /// Returns a list of all active nodes in the current quest
+    /// </summary>
     public Array<QuestObjective> GetActiveObjectives()
     {
         Array<QuestObjective> objectives = new Array<QuestObjective>();
@@ -92,7 +117,13 @@ public partial class QuestResource : Resource
         return objectives;
     }
 
-    public Array<QuestNode> GetPreviousNodes(QuestNode node, QuestEdge.EdgeType edgeType = QuestEdge.EdgeType.NORMAL)
+    /// <summary>
+    /// Returns a list of all nodes before the given node.
+    /// </summary>
+    public Array<QuestNode> GetPreviousNodes(
+        QuestNode node,
+        QuestEdge.EdgeType edgeType = QuestEdge.EdgeType.NORMAL
+    )
     {
         Array<QuestNode> previousNodes = new Array<QuestNode>();
         foreach (QuestEdge edge in Edges)
@@ -105,7 +136,13 @@ public partial class QuestResource : Resource
         return previousNodes;
     }
 
-    public Array<QuestNode> GetNextNodes(QuestNode node, QuestEdge.EdgeType edgeType = QuestEdge.EdgeType.NORMAL)
+    /// <summary>
+    /// Returns a list of all nodes after the given node.
+    /// </summary>
+    public Array<QuestNode> GetNextNodes(
+        QuestNode node,
+        QuestEdge.EdgeType edgeType = QuestEdge.EdgeType.NORMAL
+    )
     {
         Array<QuestNode> nextNodes = new Array<QuestNode>();
         foreach (QuestEdge edge in Edges)
@@ -118,24 +155,46 @@ public partial class QuestResource : Resource
         return nextNodes;
     }
 
+    /// <summary>
+    /// Returns the data path of the current resource.
+    /// </summary>
     public string GetResourcePath()
     {
         return (string)GetMeta("resource_path");
     }
 
+    /// <summary>
+    /// Fires off an event used to query a completeness of a condition.
+    /// </summary>
     public void RequestQuery(string type, string key, Variant value, QuestCondition requester)
     {
         // DONE: Emit signal to request a query.
-        QuestManager.Instance.EmitSignal(QuestManager.SignalName.ConditionQueryRequested, type, key, value, requester);
+        QuestManager.Instance.EmitSignal(
+            QuestManager.SignalName.ConditionQueryRequested,
+            type,
+            key,
+            value,
+            requester
+        );
     }
 
+    /// <summary>
+    /// Fires off signalign an objective has been completed.
+    /// </summary>
     public void CompleteObjective(QuestObjective objective)
     {
         // DONE: Emit signal to notify that an objective has been completed.
-        QuestManager.Instance.EmitSignal(QuestManager.SignalName.QuestObjectiveCompleted, this, objective);
+        QuestManager.Instance.EmitSignal(
+            QuestManager.SignalName.QuestObjectiveCompleted,
+            this,
+            objective
+        );
         NotifyActiveObjectives();
     }
 
+    /// <summary>
+    /// Fires off an event signaling this quest is finished and itself up.
+    /// </summary>
     public void CompleteQuest()
     {
         Completed = true;
@@ -145,6 +204,9 @@ public partial class QuestResource : Resource
         QuestManager.Instance.RemoveQuest(this);
     }
 
+    /// <summary>
+    /// Serializes the quest resource to a dictionary.
+    /// </summary>
     public Dictionary Serialize()
     {
         Dictionary data = new Dictionary();
@@ -157,6 +219,9 @@ public partial class QuestResource : Resource
         return data;
     }
 
+    /// <summary>
+    /// Deserializes the quest resource from a dictionary.
+    /// </summary>
     public void Deserialize(Dictionary data)
     {
         if (!IsInstance)
@@ -203,15 +268,25 @@ public partial class QuestResource : Resource
         _wasInitialized = true;
     }
 
+    /// <summary>
+    /// Fires an event that signals a new objective has been added to the quest.
+    /// </summary>
     public void NotifyActiveObjectives()
     {
         foreach (QuestObjective objective in GetActiveObjectives())
         {
             // DONE: Emit signal to notify that a new objective has been added.
-            QuestManager.Instance.EmitSignal(QuestManager.SignalName.QuestObjectiveAdded, this, objective);
+            QuestManager.Instance.EmitSignal(
+                QuestManager.SignalName.QuestObjectiveAdded,
+                this,
+                objective
+            );
         }
     }
 
+    /// <summary>
+    /// Resets the quest to its initial state.
+    /// </summary>
     internal void Reset()
     {
         Completed = false;

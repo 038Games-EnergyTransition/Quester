@@ -2,18 +2,22 @@
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// A node that represents a condition in the quest graph.
+/// </summary>
 [Tool]
 public partial class ConditionNode : QuestGraphNode
 {
-
     public string Type;
     public string Key;
     public Variant Value;
 
     [Export]
     protected LineEdit typeInput;
+
     [Export]
     protected LineEdit keyInput;
+
     [Export]
     protected VariantInput metaInput;
 
@@ -26,11 +30,19 @@ public partial class ConditionNode : QuestGraphNode
         metaInput.ValueChanged += _onMetadataInputValueChanged;
     }
 
+    /// <summary>
+    /// Returns a new instance of the model.
+    /// </summary>
+    /// <returns></returns>
     protected override QuestNode _getModel()
     {
         return new QuestCondition();
     }
 
+    /// <summary>
+    /// Sets the properties of the model.
+    /// </summary>
+    /// <param name="node"></param>
     protected override void _setModelProperties(QuestNode node)
     {
         QuestCondition condition = (QuestCondition)node;
@@ -39,6 +51,10 @@ public partial class ConditionNode : QuestGraphNode
         condition.SetMeta("Value", Value);
     }
 
+    /// <summary>
+    /// Gets the properties of the model.
+    /// </summary>
+    /// <param name="node"></param>
     protected override void _getModelProperties(QuestNode node)
     {
         QuestCondition condition = (QuestCondition)node;
@@ -51,17 +67,30 @@ public partial class ConditionNode : QuestGraphNode
         metaInput.SetValue(Value);
     }
 
-    private void _onTypeTextChanged(string type) {
+    /// <summary>
+    /// Sets the type of the condition.
+    /// </summary>
+    /// <param name="type"></param>
+    private void _onTypeTextChanged(string type)
+    {
         Type = type;
     }
 
-
-    private void _onKeyTextChanged(string key) {
+    /// <summary>
+    /// Sets the key of the condition.
+    /// </summary>
+    /// <param name="key"></param>
+    private void _onKeyTextChanged(string key)
+    {
         Key = key;
     }
 
-
-    private void _onMetadataInputValueChanged(Variant value) {
+    /// <summary>
+    /// Sets the metadata of the condition.
+    /// </summary>
+    /// <param name="value"></param>
+    private void _onMetadataInputValueChanged(Variant value)
+    {
         Value = value;
     }
 }

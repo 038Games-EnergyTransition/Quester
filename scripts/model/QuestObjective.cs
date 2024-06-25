@@ -4,43 +4,44 @@ using Godot.Collections;
 [Tool]
 public partial class QuestObjective : QuestNode
 {
-
     [Export]
     public string Description;
 
-    public Array<QuestNode> Conditions {
-        get {
-            return Graph.GetPreviousNodes(this, QuestEdge.EdgeType.CONDITIONAL);
-        }
+    public Array<QuestNode> Conditions
+    {
+        get { return Graph.GetPreviousNodes(this, QuestEdge.EdgeType.CONDITIONAL); }
     }
 
-    public bool IsExclusive {
-        get {
-            // foreach (QuestNode node in Graph.GetNextNodes(this)) {
-            //     if (node is QuestExclusiveBranchConnector || node is QuestAnyPrevious) {
-            //         return true;
-            //     }
-            // }
-            return false;
-        }
+    public bool IsExclusive
+    {
+        get { return false; }
     }
 
-    public new bool Active {
-        get {
-            if (Completed) {
+    public new bool Active
+    {
+        get
+        {
+            if (Completed)
+            {
                 return false;
             }
             return AllPreviousNodesCompleted() && !AnyChildrenActive();
         }
     }
 
+    /// <summary>
+    /// Updates all objectives and completes the objective if all conditions are met.
+    /// </summary>
     public new void Update()
     {
         bool justCompleted = false;
-        if (Active) {
-            foreach (QuestNode condition in Conditions) {
+        if (Active)
+        {
+            foreach (QuestNode condition in Conditions)
+            {
                 Update(condition);
-                if (!condition.Completed) {
+                if (!condition.Completed)
+                {
                     return;
                 }
             }
@@ -50,7 +51,8 @@ public partial class QuestObjective : QuestNode
 
         base.Update();
 
-        if (justCompleted) {
+        if (justCompleted)
+        {
             Graph.CompleteObjective(this);
         }
     }

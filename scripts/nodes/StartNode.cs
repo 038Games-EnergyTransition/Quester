@@ -1,17 +1,19 @@
 #if TOOLS
 using Godot;
 using Godot.Collections;
-using System;
 
+/// <summary>
+/// A node that represents the start in the quest graph.
+/// </summary>
 [Tool]
 public partial class StartNode : QuestGraphNode
 {
-
     public string QuestName;
     public string QuestDescription;
 
     [Export]
     protected LineEdit nameTextEdit;
+
     [Export]
     protected TextEdit descriptionTextEdit;
 
@@ -39,7 +41,7 @@ public partial class StartNode : QuestGraphNode
         QuestStart startNode = node as QuestStart;
         QuestName = startNode.Name;
         QuestDescription = startNode.Description;
-        
+
         nameTextEdit.Text = QuestName;
         descriptionTextEdit.Text = QuestDescription;
     }

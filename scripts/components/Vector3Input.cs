@@ -11,8 +11,10 @@ public partial class Vector3Input : HBoxContainer
 
     [Export]
     public SpinBox xValue;
+
     [Export]
     public SpinBox yValue;
+
     [Export]
     public SpinBox zValue;
 
@@ -23,7 +25,7 @@ public partial class Vector3Input : HBoxContainer
             var newValue = new Vector3((float)value, (float)yValue.Value, (float)zValue.Value);
             EmitSignal(SignalName.ValueChanged, newValue);
         };
-        
+
         yValue.ValueChanged += (value) =>
         {
             var newValue = new Vector3((float)xValue.Value, (float)value, (float)zValue.Value);
@@ -37,6 +39,10 @@ public partial class Vector3Input : HBoxContainer
         };
     }
 
+    /// <summary>
+    /// Sets the value of the input.
+    /// </summary>
+    /// <param name="value"></param>
     public void SetValue(Vector3 value)
     {
         xValue.Value = value.X;
@@ -44,6 +50,10 @@ public partial class Vector3Input : HBoxContainer
         zValue.Value = value.Z;
     }
 
+    /// <summary>
+    /// Gets the value of the input.
+    /// </summary>
+    /// <returns></returns>
     public Vector3 GetValue()
     {
         return new Vector3((float)xValue.Value, (float)yValue.Value, (float)zValue.Value);

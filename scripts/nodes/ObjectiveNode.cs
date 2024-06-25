@@ -2,17 +2,21 @@
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// A node that represents an objective in the quest graph.
+/// </summary>
 [Tool]
 public partial class ObjectiveNode : QuestGraphNode
 {
-
     public string QuestDescription;
     public bool Optional;
 
     [Export]
     protected CheckBox OptionalCheckBox;
+
     [Export]
     protected TextEdit descriptionTextEdit;
+
     [Export]
     protected MetadataEditor metadataEditor;
 
@@ -24,11 +28,19 @@ public partial class ObjectiveNode : QuestGraphNode
         OptionalCheckBox.Toggled += _onOptionalCheckBoxToggled;
     }
 
+    /// <summary>
+    /// Returns a new instance of the model.
+    /// </summary>
+    /// <returns></returns>
     protected override QuestNode _getModel()
     {
         return new QuestObjective();
     }
 
+    /// <summary>
+    /// Sets the properties of the model and transfers the metadata.
+    /// </summary>
+    /// <param name="node"></param>
     protected override void _setModelProperties(QuestNode node)
     {
         QuestObjective objective = (QuestObjective)node;
@@ -40,6 +52,10 @@ public partial class ObjectiveNode : QuestGraphNode
         }
     }
 
+    /// <summary>
+    /// Gets the properties of the model and transfers the metadata.
+    /// </summary>
+    /// <param name="node"></param>
     protected override void _getModelProperties(QuestNode node)
     {
         QuestObjective objective = (QuestObjective)node;
@@ -54,11 +70,18 @@ public partial class ObjectiveNode : QuestGraphNode
         metadataEditor.Update();
     }
 
+    /// <summary>
+    /// Updates the description of the objective.
+    /// </summary>
     private void _onDescriptionTextChanged()
     {
         QuestDescription = descriptionTextEdit.Text;
     }
 
+    /// <summary>
+    /// Updates the optional state of the objective.
+    /// </summary>
+    /// <param name="toggled"></param>
     private void _onOptionalCheckBoxToggled(bool toggled)
     {
         Optional = toggled;

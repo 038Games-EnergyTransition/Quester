@@ -6,13 +6,15 @@ using Godot.Collections;
 [Tool]
 public partial class MetadataEditor : VBoxContainer
 {
-
-    PackedScene MetadataItemScene = (PackedScene)GD.Load("res://addons/quester/scenes/MetadataItem.tscn");
+    PackedScene MetadataItemScene = (PackedScene)
+        GD.Load("res://addons/quester/scenes/MetadataItem.tscn");
 
     [Export]
     public Node container;
+
     [Export]
     public VBoxContainer itemsContainer;
+
     [Export]
     public Button addMetadataButton;
 
@@ -32,18 +34,31 @@ public partial class MetadataEditor : VBoxContainer
         }
     }
 
+    /// <summary>
+    /// Sets a metadata key-value pair.
+    /// </summary>
+    /// <param name="caller"></param>
     public void SetValue(MetadataItem caller)
     {
         var key = caller.GetKey();
-        var alreadyHasKey = _currentMeta.Any(metaItem => metaItem != caller && metaItem.GetKey() == key);
+        var alreadyHasKey = _currentMeta.Any(metaItem =>
+            metaItem != caller && metaItem.GetKey() == key
+        );
         if (alreadyHasKey)
         {
-            GD.PrintErr("Metadata key '{0}' already added to the node. Changes will not be saved.", key);
+            GD.PrintErr(
+                "Metadata key '{0}' already added to the node. Changes will not be saved.",
+                key
+            );
             return;
         }
         container.SetMeta(key, caller.GetValue());
     }
 
+    /// <summary>
+    /// Clears a metadata key-value pair.
+    /// </summary>
+    /// <param name="caller"></param>
     public void ClearValue(MetadataItem caller)
     {
         var key = caller.GetKey();
@@ -53,6 +68,10 @@ public partial class MetadataEditor : VBoxContainer
         }
     }
 
+    /// <summary>
+    /// Erases a metadata key-value pair.
+    /// </summary>
+    /// <param name="caller"></param>
     public void EraseValue(MetadataItem caller)
     {
         ClearValue(caller);
@@ -62,6 +81,12 @@ public partial class MetadataEditor : VBoxContainer
         }
     }
 
+    /// <summary>
+    /// Adds a metadata item to the container.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     private MetadataItem _AddItem(string key, Variant value)
     {
         var instance = (MetadataItem)MetadataItemScene.Instantiate();
@@ -72,6 +97,9 @@ public partial class MetadataEditor : VBoxContainer
         return instance;
     }
 
+    /// <summary>
+    /// Called when the "Add Metadata" button is pressed.
+    /// </summary>
     public void OnAddMetadataButtonPressed()
     {
         _AddItem("", false);

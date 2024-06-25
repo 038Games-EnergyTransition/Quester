@@ -1,6 +1,9 @@
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// A node that represents the end of a quest.
+/// </summary>
 [Tool]
 public partial class QuestEnd : QuestNode
 {

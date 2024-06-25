@@ -1,6 +1,9 @@
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// A node that represents an edge between two nodes in a quest graph.
+/// </summary>
 [Tool]
 public partial class QuestEdge : Resource
 {

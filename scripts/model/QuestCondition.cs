@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
-
+/// <summary>
+/// A node that represents a quest condition.
+/// </summary>
 [Tool]
 public partial class QuestCondition : QuestNode
 {

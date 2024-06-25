@@ -1,7 +1,10 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 using Godot.Collections;
-using System;
 
+/// <summary>
+/// an example implimentation of a data manager used for quests.
+/// </summary>
 public partial class DataManager : Node
 {
     [Signal]
@@ -13,7 +16,12 @@ public partial class DataManager : Node
 
     public override void _Ready()
     {
-        QuestManager.Instance.ConditionQueryRequested += (string type, string key, Variant value, QuestCondition requester) =>
+        QuestManager.Instance.ConditionQueryRequested += (
+            string type,
+            string key,
+            Variant value,
+            QuestCondition requester
+        ) =>
         {
             if (type == "variable")
             {
@@ -24,7 +32,12 @@ public partial class DataManager : Node
             }
         };
 
-        QuestManager.Instance.ActionQueryRequested += (string type, string key, Variant value, QuestAction requester) =>
+        QuestManager.Instance.ActionQueryRequested += (
+            string type,
+            string key,
+            Variant value,
+            QuestAction requester
+        ) =>
         {
             if (type == "variable")
             {
@@ -33,16 +46,29 @@ public partial class DataManager : Node
         };
     }
 
+    /// <summary>
+    /// Compares the value of a key to a given value.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     private bool CompareValue(string key, Variant value)
     {
         if (value.VariantType == Variant.Type.Float)
         {
-            return (float)value % 1 == 0 ? GetValue(key).Equals((int)value) : GetValue(key).Equals(value);
+            return (float)value % 1 == 0
+                ? GetValue(key).Equals((int)value)
+                : GetValue(key).Equals(value);
         }
 
         return GetValue(key).Equals(value);
     }
 
+    /// <summary>
+    /// Sets a value in the data manager.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
     public void SetValue(string key, Variant value)
     {
         if (_data.ContainsKey(key))
@@ -57,6 +83,11 @@ public partial class DataManager : Node
         EmitSignal(SignalName.DataChanged, key, value);
     }
 
+    /// <summary>
+    /// Gets a value from the data manager.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public Variant GetValue(string key)
     {
         if (_data.ContainsKey(key))
@@ -66,6 +97,9 @@ public partial class DataManager : Node
         return new Variant();
     }
 
+    /// <summary>
+    ///gets the current instance of the DataManager
+    /// </summary>
     public static DataManager GetInstance()
     {
         if (_instance == null)

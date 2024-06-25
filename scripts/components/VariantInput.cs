@@ -1,29 +1,37 @@
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// A class that represents a variant input in a graphNode.
+/// </summary>
 [Tool]
 public partial class VariantInput : HBoxContainer
 {
-
     [Signal]
     public delegate void ValueChangedEventHandler(Variant value);
 
     [Export]
     protected OptionButton typeSelect;
+
     [Export]
     protected Control inputsContainer;
 
     [ExportCategory("Variants")]
     [Export]
     public CheckBox boolInput;
+
     [Export]
     public LineEdit stringInput;
+
     [Export]
     public Vector2Input vector2Input;
+
     [Export]
     public Vector3Input vector3Input;
+
     [Export]
     public SpinBox intInput;
+
     [Export]
     public SpinBox floatInput;
 
@@ -45,6 +53,10 @@ public partial class VariantInput : HBoxContainer
         floatInput.ValueChanged += _onValueChanged;
     }
 
+    /// <summary>
+    /// Selects the input type by index.
+    /// </summary>
+    /// <param name="index"></param>
     public void SelectType(int index)
     {
         foreach (Control child in inputsContainer.GetChildren())
@@ -54,6 +66,10 @@ public partial class VariantInput : HBoxContainer
         (inputsContainer.GetChild(index) as Control).Show();
     }
 
+    /// <summary>
+    /// Sets the value of the input and the type of input.
+    /// </summary>
+    /// <param name="value"></param>
     public void SetValue(Variant value)
     {
         int index = 0;
@@ -105,6 +121,10 @@ public partial class VariantInput : HBoxContainer
         }
     }
 
+    /// <summary>
+    /// Gets the value of the input.
+    /// </summary>
+    /// <returns></returns>
     public Variant GetValue()
     {
         Control input = inputsContainer.GetChild(typeSelect.Selected) as Control;
@@ -128,10 +148,14 @@ public partial class VariantInput : HBoxContainer
         {
             return (float)(input as SpinBox).Value;
         }
-        
+
         return new Variant();
     }
 
+    /// <summary>
+    /// Called when the type is selected.
+    /// </summary>
+    /// <param name="index"></param>
     private void _onTypeSelected(long index)
     {
         SelectType((int)index);
@@ -144,26 +168,46 @@ public partial class VariantInput : HBoxContainer
         _emitValueChanged(value);
     }
 
+    /// <summary>
+    /// Called when the value is changed and its a boolean.
+    /// </summary>
+    /// <param name="value"></param>
     private void _onValueChanged(bool value)
     {
         _emitValueChanged(value);
     }
 
+    /// <summary>
+    /// Called when the value is changed and its a string.
+    /// </summary>
+    /// <param name="value"></param>
     private void _onValueChanged(string value)
     {
         _emitValueChanged(value);
     }
 
+    /// <summary>
+    /// Called when the value is changed and its a vector2.
+    /// </summary>
+    /// <param name="value"></param>
     private void _onValueChanged(Vector2 value)
     {
         _emitValueChanged(value);
     }
 
+    /// <summary>
+    /// Called when the value is changed and its a vector3.
+    /// </summary>
+    /// <param name="value"></param>
     private void _onValueChanged(Vector3 value)
     {
         _emitValueChanged(value);
     }
 
+    /// <summary>
+    /// Called when the value is changed and its an integer or float.
+    /// </summary>
+    /// <param name="value"></param>
     private void _onValueChanged(double value)
     {
         if (value % 1 == 0)
@@ -176,6 +220,10 @@ public partial class VariantInput : HBoxContainer
         }
     }
 
+    /// <summary>
+    /// Emits the ValueChanged signal.
+    /// </summary>
+    /// <param name="value"></param>
     private void _emitValueChanged(Variant value)
     {
         EmitSignal(SignalName.ValueChanged, value);
