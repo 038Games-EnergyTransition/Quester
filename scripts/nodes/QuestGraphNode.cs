@@ -40,6 +40,4 @@ public abstract partial class QuestGraphNode : GraphNode
     protected abstract void _setModelProperties(QuestNode node);
     protected abstract void _getModelProperties(QuestNode node);
 }
-
-}
 #endif
